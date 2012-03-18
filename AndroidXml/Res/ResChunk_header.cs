@@ -7,9 +7,11 @@ namespace AndroidXml.Res
     {
         /// Type identifier for this chunk.  The meaning of this value depends on the containing chunk.
         public ResourceType Type { get; set; }
+
         /// Size of the chunk header (in bytes).  Adding this value to the address of the chunk allows
         /// you to find its associated data (if any).
         public ushort HeaderSize { get; set; }
+
         /// Total size of this chunk (in bytes).  This is the chunkSize plus the size of any data 
         /// associated with the chunk.  Adding this value to the chunk allows you to completely skip
         /// its contents (including any child chunks).  If this value is the same as chunkSize, there 

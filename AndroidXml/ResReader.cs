@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using AndroidXml.Res;
 using AndroidXml.Utils;
-using ValueType = AndroidXml.Res.ValueType;
 
 namespace AndroidXml
 {
@@ -19,7 +18,7 @@ namespace AndroidXml
             {
                 Size = ReadUInt16(),
                 Res0 = ReadByte(),
-                DataType = (Res.ValueType) ReadByte(),
+                DataType = (ValueType) ReadByte(),
                 RawData = ReadUInt32()
             };
         }
@@ -49,7 +48,7 @@ namespace AndroidXml
 
         public virtual ResStringPool_ref ReadResStringPool_ref()
         {
-            var index = ReadUInt32();
+            uint index = ReadUInt32();
             return new ResStringPool_ref
             {
                 Index = index == 0xFFFFFFFFu ? (uint?) null : index,
@@ -115,7 +114,7 @@ namespace AndroidXml
             return new ResTable_map_entry
             {
                 Size = ReadUInt16(),
-                Flags = (EntryFlags)ReadUInt16(),
+                Flags = (EntryFlags) ReadUInt16(),
                 Key = ReadResStringPool_ref(),
                 Parent = ReadResTable_ref(),
                 Count = ReadUInt32(),
@@ -138,7 +137,7 @@ namespace AndroidXml
 
         public virtual ResTable_ref ReadResTable_ref()
         {
-            var ident = ReadUInt32();
+            uint ident = ReadUInt32();
             return new ResTable_ref
             {
                 Ident = ident == 0xFFFFFFFFu ? (uint?) null : ident,
@@ -264,21 +263,21 @@ namespace AndroidXml
             bytesLeft -= 4*header.StringCount;
             bytesLeft -= 4*header.StyleCount;
 
-            var stringsEnd = header.StyleCount > 0 ? header.StylesStart : header.Header.Size;
-            var rawStringData = ReadBytes((int) stringsEnd - (int) header.StringStart);
+            uint stringsEnd = header.StyleCount > 0 ? header.StylesStart : header.Header.Size;
+            byte[] rawStringData = ReadBytes((int) stringsEnd - (int) header.StringStart);
 
             bytesLeft -= rawStringData.Length;
 
             bool isUtf8 = (header.Flags & StringPoolFlags.UTF8_FLAG) == StringPoolFlags.UTF8_FLAG;
 
-            foreach (var startingIndex in stringIndices)
+            foreach (uint startingIndex in stringIndices)
             {
-                var pos = startingIndex;
+                uint pos = startingIndex;
                 if (isUtf8)
                 {
                     uint charLen = Helper.DecodeLengthUtf8(rawStringData, ref pos);
                     uint byteLen = Helper.DecodeLengthUtf8(rawStringData, ref pos);
-                    var item = Encoding.UTF8.GetString(rawStringData, (int) pos, (int) byteLen);
+                    string item = Encoding.UTF8.GetString(rawStringData, (int) pos, (int) byteLen);
                     if (item.Length != charLen)
                     {
                         Debug.WriteLine("Warning: UTF-8 string length ({0}) not matching specified length ({1}).",
@@ -290,7 +289,7 @@ namespace AndroidXml
                 {
                     uint charLen = Helper.DecodeLengthUtf16(rawStringData, ref pos);
                     uint byteLen = charLen*2;
-                    var item = Encoding.Unicode.GetString(rawStringData, (int) pos, (int) byteLen);
+                    string item = Encoding.Unicode.GetString(rawStringData, (int) pos, (int) byteLen);
                     pool.StringData.Add(item);
                 }
             }
@@ -300,7 +299,7 @@ namespace AndroidXml
                 pool.StyleData.Add(ReadResStringPool_span());
             }
 
-            bytesLeft -= header.StyleCount * 12; // sizeof(ResStringPool_span) in C++
+            bytesLeft -= header.StyleCount*12; // sizeof(ResStringPool_span) in C++
 
             if (bytesLeft < 0)
             {
@@ -316,7 +315,8 @@ namespace AndroidXml
             return pool;
         }
 
-        public virtual ResXMLTree_startelement ReadResXMLTree_startelement(ResXMLTree_node node, ResXMLTree_attrExt attrExt)
+        public virtual ResXMLTree_startelement ReadResXMLTree_startelement(ResXMLTree_node node,
+                                                                           ResXMLTree_attrExt attrExt)
         {
             var element = new ResXMLTree_startelement
             {
@@ -325,7 +325,7 @@ namespace AndroidXml
                 Attributes = new List<ResXMLTree_attribute>()
             };
 
-            var bytesLeft = node.Header.Size - 0x24u;
+            uint bytesLeft = node.Header.Size - 0x24u;
 
             for (int i = 0; i < attrExt.AttributeCount; i++)
             {
@@ -340,7 +340,7 @@ namespace AndroidXml
             if (bytesLeft > 0)
             {
                 Debug.WriteLine("Warning: Garbage at the end of the StringPool block. Padding?");
-                ReadBytes((int)bytesLeft);
+                ReadBytes((int) bytesLeft);
             }
 
             return element;
@@ -353,7 +353,7 @@ namespace AndroidXml
                 Header = header,
                 ResouceIds = new List<uint>()
             };
-            for (int pos = 8; pos < header.Size; pos+=4)
+            for (int pos = 8; pos < header.Size; pos += 4)
             {
                 result.ResouceIds.Add(ReadUInt32());
             }

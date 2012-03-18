@@ -5,8 +5,8 @@ namespace AndroidXmlDemo.Commands
 {
     public class DelegateCommand<T> : ICommand
     {
-        private readonly Action<T> _execute;
         private readonly Func<T, bool> _canExecuteDelegate;
+        private readonly Action<T> _execute;
         private bool _canExecuteValue;
 
         public DelegateCommand(Action<T> execute) : this(execute, true) {}
@@ -21,6 +21,19 @@ namespace AndroidXmlDemo.Commands
             _canExecuteDelegate = canExecute;
             _canExecuteValue = canExecuteInitial;
         }
+
+        protected bool CanExecuteValue
+        {
+            get { return _canExecuteValue; }
+            set
+            {
+                if (value == _canExecuteValue) return;
+                _canExecuteValue = value;
+                RaiseCanExecuteChanged();
+            }
+        }
+
+        #region ICommand Members
 
         public void Execute(object parameter)
         {
@@ -40,29 +53,20 @@ namespace AndroidXmlDemo.Commands
             if (_canExecuteDelegate == null) return _canExecuteValue;
             try
             {
-                var result = _canExecuteDelegate((T) parameter);
+                bool result = _canExecuteDelegate((T) parameter);
                 CanExecuteValue = result;
                 return result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error in Command.CanExecute: {0}", ex);
                 return false;
             }
         }
 
-        protected bool CanExecuteValue
-        {
-            get { return _canExecuteValue; }
-            set
-            {
-                if (value == _canExecuteValue) return;
-                _canExecuteValue = value;
-                RaiseCanExecuteChanged();
-            }
-        }
-
         public event EventHandler CanExecuteChanged;
+
+        #endregion
 
         public void RaiseCanExecuteChanged()
         {
@@ -78,9 +82,11 @@ namespace AndroidXmlDemo.Commands
 
     public class DelegateCommand : DelegateCommand<object>
     {
-        public DelegateCommand(Action execute) : base(o => execute()) { }
-        public DelegateCommand(Action execute, Func<bool> canExecute) : base(o => execute(), o => canExecute()) { }
-        public DelegateCommand(Action execute, bool canExecuteInitial) : base(o => execute(), canExecuteInitial) { }
-        public DelegateCommand(Action execute, Func<bool> canExecute, bool canExecuteInitial) : base(o => execute(), o => canExecute(), canExecuteInitial) { }
+        public DelegateCommand(Action execute) : base(o => execute()) {}
+        public DelegateCommand(Action execute, Func<bool> canExecute) : base(o => execute(), o => canExecute()) {}
+        public DelegateCommand(Action execute, bool canExecuteInitial) : base(o => execute(), canExecuteInitial) {}
+
+        public DelegateCommand(Action execute, Func<bool> canExecute, bool canExecuteInitial)
+            : base(o => execute(), o => canExecute(), canExecuteInitial) {}
     }
 }

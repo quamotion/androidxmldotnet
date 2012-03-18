@@ -211,32 +211,43 @@ namespace AndroidXml.Res
     {
         /// Contains no data.
         TYPE_NULL = 0x00,
+
         /// Resource reference as a <see cref="ResTable_ref"/>.
         TYPE_REFERENCE = 0x01,
+
         /// Attribute resource identifier (Not supported)
         TYPE_ATTRIBUTE = 0x02,
+
         /// String reference as a <see cref="ResStringPool_ref"/>.
         TYPE_STRING = 0x03,
+
         /// Float value.
         TYPE_FLOAT = 0x04,
+
         /// Complex dimension value. Float value + <see cref="DimensionUnit"/>.
         TYPE_DIMENSION = 0x05,
+
         /// Complex fraction value. Float value + <see cref="FractionUnit"/>.
         TYPE_FRACTION = 0x06,
         //TYPE_FIRST_INT = 0x10,
         /// Integer rendered in decimal.
         TYPE_INT_DEC = 0x10,
+
         /// Integer rendered in hexadecimal.
         TYPE_INT_HEX = 0x11,
+
         /// Integer rendered as a boolean.
         TYPE_INT_BOOLEAN = 0x12,
         //TYPE_FIRST_COLOR_INT = 0x1c,
         /// <see cref="Color"/> value rendered as #AARRGGBB
         TYPE_INT_COLOR_ARGB8 = 0x1c,
+
         /// <see cref="Color"/> value rendered as #RRGGBB (alpha = FF)
         TYPE_INT_COLOR_RGB8 = 0x1d,
+
         /// <see cref="Color"/> value rendered as #ARGB
         TYPE_INT_COLOR_ARGB4 = 0x1e,
+
         /// <see cref="Color"/> value rendered as #RGB
         TYPE_INT_COLOR_RGB4 = 0x1f,
         //TYPE_LAST_COLOR_INT = 0x1f,

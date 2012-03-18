@@ -7,6 +7,8 @@ namespace AndroidXml.Res
 {
     public class ResXMLParser
     {
+        #region XmlParserEventCode enum
+
         public enum XmlParserEventCode
         {
             NOT_STARTED,
@@ -22,16 +24,18 @@ namespace AndroidXml.Res
             TEXT = ResourceType.RES_XML_CDATA_TYPE
         }
 
-        private XmlParserEventCode _eventCode;
-        private ResXMLTree_node _currentNode;
-        private object _currentExtension;
-        private ResReader _reader;
-        private ResStringPool _strings;
-        private readonly Stream _source;
-        private List<ResXMLTree_attribute> _attributes;
-        private ResResourceMap _resourceMap;
+        #endregion
 
         private readonly IEnumerator<XmlParserEventCode> _parserIterator;
+
+        private readonly Stream _source;
+        private List<ResXMLTree_attribute> _attributes;
+        private object _currentExtension;
+        private ResXMLTree_node _currentNode;
+        private XmlParserEventCode _eventCode;
+        private ResReader _reader;
+        private ResResourceMap _resourceMap;
+        private ResStringPool _strings;
 
         public ResXMLParser(Stream source)
         {
@@ -39,11 +43,6 @@ namespace AndroidXml.Res
             _reader = new ResReader(_source);
             _eventCode = XmlParserEventCode.NOT_STARTED;
             _parserIterator = ParserIterator().GetEnumerator();
-        }
-
-        public void Restart()
-        {
-            throw new NotSupportedException();
         }
 
         public ResStringPool Strings
@@ -54,100 +53,6 @@ namespace AndroidXml.Res
         public ResResourceMap ResourceMap
         {
             get { return _resourceMap; }
-        }
-
-        public XmlParserEventCode Next()
-        {
-            if (_parserIterator.MoveNext())
-            {
-                _eventCode = _parserIterator.Current;
-                return _parserIterator.Current;
-            }
-            _eventCode = XmlParserEventCode.END_DOCUMENT;
-            return _eventCode;
-        }
-
-        private void ClearState()
-        {
-            _currentNode = null;
-            _currentExtension = null;
-            _attributes = null;
-        }
-
-        private IEnumerable<XmlParserEventCode> ParserIterator()
-        {
-            while (true)
-            {
-                ClearState();
-                ResChunk_header header;
-                try
-                {
-                    header = _reader.ReadResChunk_header();
-                }
-                catch (EndOfStreamException)
-                {
-                    break;
-                }
-                var subStream = new BoundedStream(_reader.BaseStream, header.Size - 8);
-                var subReader = new ResReader(subStream);
-                switch (header.Type)
-                {
-                    case ResourceType.RES_XML_TYPE:
-                        yield return XmlParserEventCode.START_DOCUMENT;
-                        _reader = subReader; // Bound whole file
-                        continue; // Don't skip content
-                    case ResourceType.RES_STRING_POOL_TYPE:
-                        var stringPoolHeader = subReader.ReadResStringPool_header(header);
-                        _strings = subReader.ReadResStringPool(stringPoolHeader);
-                        break;
-                    case ResourceType.RES_XML_RESOURCE_MAP_TYPE:
-                        var resourceMap = subReader.ReadResResourceMap(header);
-                        _resourceMap = resourceMap;
-                        break;
-                    case ResourceType.RES_XML_START_NAMESPACE_TYPE:
-                        _currentNode = subReader.ReadResXMLTree_node(header);
-                        _currentExtension = subReader.ReadResXMLTree_namespaceExt();
-                        yield return XmlParserEventCode.START_NAMESPACE;
-                        break;
-                    case ResourceType.RES_XML_END_NAMESPACE_TYPE:
-                        _currentNode = subReader.ReadResXMLTree_node(header);
-                        _currentExtension = subReader.ReadResXMLTree_namespaceExt();
-                        yield return XmlParserEventCode.END_NAMESPACE;
-                        break;
-                    case ResourceType.RES_XML_START_ELEMENT_TYPE:
-                        _currentNode = subReader.ReadResXMLTree_node(header);
-                        var attrExt = subReader.ReadResXMLTree_attrExt();
-                        _currentExtension = attrExt;
-                        
-                        _attributes = new List<ResXMLTree_attribute>();
-                        for (int i = 0; i < attrExt.AttributeCount; i++)
-                        {
-                            _attributes.Add(subReader.ReadResXMLTree_attribute());
-                        }
-                        yield return XmlParserEventCode.START_TAG;
-                        break;
-                    case ResourceType.RES_XML_END_ELEMENT_TYPE:
-                        _currentNode = subReader.ReadResXMLTree_node(header);
-                        _currentExtension = subReader.ReadResXMLTree_endElementExt();
-                        yield return XmlParserEventCode.END_TAG;
-                        break;
-                    case ResourceType.RES_XML_CDATA_TYPE:
-                        _currentNode = subReader.ReadResXMLTree_node(header);
-                        _currentExtension = subReader.ReadResXMLTree_cdataExt();
-                        yield return XmlParserEventCode.TEXT;
-                        break;
-                    default:
-                        Console.WriteLine("Warning: Skipping chunk of type {0} (0x{1:x4})",
-                                          header.Type, (int) header.Type);
-                        break;
-                }
-                var junk = subStream.ReadFully();
-                if (junk.Length > 0)
-                {
-                    Console.WriteLine("Warning: Skipping {0} bytes at the end of a {1} (0x{2:x4}) chunk.",
-                                      junk.Length, header.Type, (int) header.Type);
-                }
-            }
         }
 
         public XmlParserEventCode EventCode
@@ -296,21 +201,120 @@ namespace AndroidXml.Res
             get { return _attributes == null ? 0 : (uint) _attributes.Count; }
         }
 
+        public void Restart()
+        {
+            throw new NotSupportedException();
+        }
+
+        public XmlParserEventCode Next()
+        {
+            if (_parserIterator.MoveNext())
+            {
+                _eventCode = _parserIterator.Current;
+                return _parserIterator.Current;
+            }
+            _eventCode = XmlParserEventCode.END_DOCUMENT;
+            return _eventCode;
+        }
+
+        private void ClearState()
+        {
+            _currentNode = null;
+            _currentExtension = null;
+            _attributes = null;
+        }
+
+        private IEnumerable<XmlParserEventCode> ParserIterator()
+        {
+            while (true)
+            {
+                ClearState();
+                ResChunk_header header;
+                try
+                {
+                    header = _reader.ReadResChunk_header();
+                }
+                catch (EndOfStreamException)
+                {
+                    break;
+                }
+                var subStream = new BoundedStream(_reader.BaseStream, header.Size - 8);
+                var subReader = new ResReader(subStream);
+                switch (header.Type)
+                {
+                    case ResourceType.RES_XML_TYPE:
+                        yield return XmlParserEventCode.START_DOCUMENT;
+                        _reader = subReader; // Bound whole file
+                        continue; // Don't skip content
+                    case ResourceType.RES_STRING_POOL_TYPE:
+                        ResStringPool_header stringPoolHeader = subReader.ReadResStringPool_header(header);
+                        _strings = subReader.ReadResStringPool(stringPoolHeader);
+                        break;
+                    case ResourceType.RES_XML_RESOURCE_MAP_TYPE:
+                        ResResourceMap resourceMap = subReader.ReadResResourceMap(header);
+                        _resourceMap = resourceMap;
+                        break;
+                    case ResourceType.RES_XML_START_NAMESPACE_TYPE:
+                        _currentNode = subReader.ReadResXMLTree_node(header);
+                        _currentExtension = subReader.ReadResXMLTree_namespaceExt();
+                        yield return XmlParserEventCode.START_NAMESPACE;
+                        break;
+                    case ResourceType.RES_XML_END_NAMESPACE_TYPE:
+                        _currentNode = subReader.ReadResXMLTree_node(header);
+                        _currentExtension = subReader.ReadResXMLTree_namespaceExt();
+                        yield return XmlParserEventCode.END_NAMESPACE;
+                        break;
+                    case ResourceType.RES_XML_START_ELEMENT_TYPE:
+                        _currentNode = subReader.ReadResXMLTree_node(header);
+                        ResXMLTree_attrExt attrExt = subReader.ReadResXMLTree_attrExt();
+                        _currentExtension = attrExt;
+
+                        _attributes = new List<ResXMLTree_attribute>();
+                        for (int i = 0; i < attrExt.AttributeCount; i++)
+                        {
+                            _attributes.Add(subReader.ReadResXMLTree_attribute());
+                        }
+                        yield return XmlParserEventCode.START_TAG;
+                        break;
+                    case ResourceType.RES_XML_END_ELEMENT_TYPE:
+                        _currentNode = subReader.ReadResXMLTree_node(header);
+                        _currentExtension = subReader.ReadResXMLTree_endElementExt();
+                        yield return XmlParserEventCode.END_TAG;
+                        break;
+                    case ResourceType.RES_XML_CDATA_TYPE:
+                        _currentNode = subReader.ReadResXMLTree_node(header);
+                        _currentExtension = subReader.ReadResXMLTree_cdataExt();
+                        yield return XmlParserEventCode.TEXT;
+                        break;
+                    default:
+                        Console.WriteLine("Warning: Skipping chunk of type {0} (0x{1:x4})",
+                                          header.Type, (int) header.Type);
+                        break;
+                }
+                byte[] junk = subStream.ReadFully();
+                if (junk.Length > 0)
+                {
+                    Console.WriteLine("Warning: Skipping {0} bytes at the end of a {1} (0x{2:x4}) chunk.",
+                                      junk.Length, header.Type, (int) header.Type);
+                }
+            }
+        }
+
         public AttributeInfo GetAttribute(uint? index)
         {
             if (index == null || _attributes == null) return null;
             if (index >= _attributes.Count) throw new ArgumentOutOfRangeException("index");
-            var attr = _attributes[(int) index];
+            ResXMLTree_attribute attr = _attributes[(int) index];
             return new AttributeInfo(this, attr);
         }
 
         public uint? IndexOfAttribute(string ns, string attribute)
         {
-            var nsID = _strings.IndexOfString(ns);
-            var nameID = _strings.IndexOfString(attribute);
+            uint? nsID = _strings.IndexOfString(ns);
+            uint? nameID = _strings.IndexOfString(attribute);
             if (nameID == null) return null;
             uint index = 0;
-            foreach (var attr in _attributes)
+            foreach (ResXMLTree_attribute attr in _attributes)
             {
                 if (attr.Namespace.Index == nsID && attr.Name.Index == nameID)
                 {
@@ -320,6 +324,15 @@ namespace AndroidXml.Res
             }
             return null;
         }
+
+        public void Close()
+        {
+            if (_eventCode == XmlParserEventCode.CLOSED) return;
+            _eventCode = XmlParserEventCode.CLOSED;
+            _reader.Close();
+        }
+
+        #region Nested type: AttributeInfo
 
         public class AttributeInfo
         {
@@ -358,11 +371,6 @@ namespace AndroidXml.Res
             public Res_value TypedValue { get; private set; }
         }
 
-        public void Close()
-        {
-            if (_eventCode == XmlParserEventCode.CLOSED) return;
-            _eventCode = XmlParserEventCode.CLOSED;
-            _reader.Close();
-        }
+        #endregion
     }
 }

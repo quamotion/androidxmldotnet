@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AndroidXml.Res
 {
@@ -32,7 +30,7 @@ namespace AndroidXml.Res
         {
             if (string.IsNullOrEmpty(target)) return null;
             uint index = 0;
-            foreach (var s in StringData)
+            foreach (string s in StringData)
             {
                 if (s == target) return index;
                 index++;
@@ -48,7 +46,8 @@ namespace AndroidXml.Res
                     "stringIndex", stringIndex, string.Format("index >= {0}", StringData.Count));
             }
             int currentIndex = 0;
-            foreach (var style in StyleData) {
+            foreach (ResStringPool_span style in StyleData)
+            {
                 if (style.IsEnd)
                 {
                     currentIndex++;

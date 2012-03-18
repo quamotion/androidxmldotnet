@@ -45,7 +45,7 @@ namespace AndroidXml
             Write(data.Header);
             _writer.Write(data.StringCount);
             _writer.Write(data.StyleCount);
-            _writer.Write((uint)data.Flags);
+            _writer.Write((uint) data.Flags);
             _writer.Write(data.StringStart);
             _writer.Write(data.StylesStart);
         }
@@ -108,8 +108,8 @@ namespace AndroidXml
             Write(data.Header);
             _writer.Write(data.Id);
             var stringData = new byte[256];
-            var tempData = Encoding.Unicode.GetBytes(data.Name);
-            var length = Math.Min(255, tempData.Length); // last pair of bytes must be 0
+            byte[] tempData = Encoding.Unicode.GetBytes(data.Name);
+            int length = Math.Min(255, tempData.Length); // last pair of bytes must be 0
             Array.Copy(tempData, stringData, length);
             _writer.Write(stringData);
             _writer.Write(data.TypeStrings);

@@ -7,12 +7,16 @@ namespace AndroidXmlDemo.Models
 {
     public abstract class ObservableObject<T> : INotifyPropertyChanged where T : ObservableObject<T>
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         protected PropertyChangedEventHandler PropertyChangedHandler
         {
             get { return PropertyChanged; }
         }
+
+        #region INotifyPropertyChanged Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
 
         public void RaisePropertyChanged(string propertyName)
         {
@@ -40,10 +44,10 @@ namespace AndroidXmlDemo.Models
             {
                 throw new ArgumentException("Not a property of " + typeof (T).Name, "expr");
             }
-            var memberInfo = memberExpression.Member;
+            MemberInfo memberInfo = memberExpression.Member;
             if (!(memberInfo is PropertyInfo))
             {
-                var message = string.Format("Not a property: {0}.{1}", typeof (T).Name, memberInfo.Name);
+                string message = string.Format("Not a property: {0}.{1}", typeof (T).Name, memberInfo.Name);
                 throw new ArgumentException(message, "expr");
             }
             RaisePropertyChanged(memberInfo.Name);

@@ -2,7 +2,8 @@ using System;
 
 namespace AndroidXml.Utils
 {
-    internal static class Helper {
+    internal static class Helper
+    {
         public static uint SetBits(uint field, uint value, uint mask, int shift)
         {
             return (field & ~(mask << shift)) | ((value & mask) << shift);

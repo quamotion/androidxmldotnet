@@ -12,19 +12,19 @@ namespace AndroidXml.Res
 
         public byte ID
         {
-            get { return (byte)Helper.GetBits(RawID, 0xFFu, 24); }
+            get { return (byte) Helper.GetBits(RawID, 0xFFu, 24); }
             set { RawID = Helper.SetBits(RawID, value, 0xFFu, 24); }
         }
 
         public byte Res0
         {
-            get { return (byte)Helper.GetBits(RawID, 0xFFu, 16); }
+            get { return (byte) Helper.GetBits(RawID, 0xFFu, 16); }
             set { RawID = Helper.SetBits(RawID, value, 0xFFu, 16); }
         }
 
         public ushort Res1
         {
-            get { return (ushort)Helper.GetBits(RawID, 0xFFFFu, 0); }
+            get { return (ushort) Helper.GetBits(RawID, 0xFFFFu, 0); }
             set { RawID = Helper.SetBits(RawID, value, 0xFFFFu, 0); }
         }
     }

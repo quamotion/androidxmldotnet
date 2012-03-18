@@ -8,10 +8,10 @@ namespace AndroidXml.Utils
     /// A bounded stream forwards all read and write calls to the underlying stream, but is prevented from
     /// reading or writing past the set bound.
     /// </summary>
-    class BoundedStream : Stream
+    internal class BoundedStream : Stream
     {
-        private readonly Stream _source;
         private readonly long _length;
+        private readonly Stream _source;
         private readonly long _sourceOrigin;
 
         /// <summary>Constructs a bounded stream ranging from the current position, to <paramref name="length"/> bytes ahead.</summary>
@@ -22,6 +22,80 @@ namespace AndroidXml.Utils
             _source = source;
             _length = length;
             _sourceOrigin = source.Position;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current stream supports reading.
+        /// </summary>
+        /// <returns>
+        /// true if the stream supports reading; otherwise, false.
+        /// </returns>
+        /// <filterpriority>1</filterpriority>
+        public override bool CanRead
+        {
+            get { return _source.CanRead; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current stream supports seeking.
+        /// </summary>
+        /// <returns>
+        /// true if the stream supports seeking; otherwise, false.
+        /// </returns>
+        /// <filterpriority>1</filterpriority>
+        public override bool CanSeek
+        {
+            get { return _source.CanSeek; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current stream supports writing.
+        /// </summary>
+        /// <returns>
+        /// true if the stream supports writing; otherwise, false.
+        /// </returns>
+        /// <filterpriority>1</filterpriority>
+        public override bool CanWrite
+        {
+            get { return _source.CanWrite; }
+        }
+
+        /// <summary>
+        /// When overridden in a derived class, gets the length in bytes of the stream.
+        /// </summary>
+        /// <returns>
+        /// A long value representing the length of the stream in bytes.
+        /// </returns>
+        /// <exception cref="T:System.NotSupportedException">A class derived from Stream does not support seeking. </exception>
+        /// <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        /// <filterpriority>1</filterpriority>
+        public override long Length
+        {
+            get { return _length; }
+        }
+
+        /// <summary>
+        /// Gets or sets the position within the current stream.
+        /// </summary>
+        /// <returns>
+        /// The current position within the stream.
+        /// </returns>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        /// <exception cref="T:System.NotSupportedException">The stream does not support seeking. </exception>
+        /// <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        /// <filterpriority>1</filterpriority>
+        public override long Position
+        {
+            get { return _source.Position - _sourceOrigin; }
+            set { Seek(value, SeekOrigin.Begin); }
+        }
+
+        /// <summary>
+        /// Gets the absolute position of the start of this bound.
+        /// </summary>
+        public long SourceOrigin
+        {
+            get { return _sourceOrigin; }
         }
 
         /// <summary>
@@ -103,7 +177,7 @@ namespace AndroidXml.Utils
             if (!_source.CanRead) throw new NotSupportedException();
             if (count < 0) throw new ArgumentOutOfRangeException("count");
             if (count == 0) return 0;
-            var finalPosition = _source.Position - _sourceOrigin + count;
+            long finalPosition = _source.Position - _sourceOrigin + count;
             if (finalPosition > _length)
             {
                 count -= (int) (finalPosition - _length);
@@ -130,86 +204,12 @@ namespace AndroidXml.Utils
             if (!_source.CanWrite) throw new NotSupportedException();
             if (count < 0) throw new ArgumentOutOfRangeException("count");
             if (count == 0) return;
-            var finalPosition = _source.Position - _sourceOrigin + count;
+            long finalPosition = _source.Position - _sourceOrigin + count;
             if (finalPosition > _length)
             {
                 throw new IOException("Cannot write past the end of a BoundedStream.");
             }
             _source.Read(buffer, offset, count);
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the current stream supports reading.
-        /// </summary>
-        /// <returns>
-        /// true if the stream supports reading; otherwise, false.
-        /// </returns>
-        /// <filterpriority>1</filterpriority>
-        public override bool CanRead
-        {
-            get { return _source.CanRead; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the current stream supports seeking.
-        /// </summary>
-        /// <returns>
-        /// true if the stream supports seeking; otherwise, false.
-        /// </returns>
-        /// <filterpriority>1</filterpriority>
-        public override bool CanSeek
-        {
-            get { return _source.CanSeek; }
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the current stream supports writing.
-        /// </summary>
-        /// <returns>
-        /// true if the stream supports writing; otherwise, false.
-        /// </returns>
-        /// <filterpriority>1</filterpriority>
-        public override bool CanWrite
-        {
-            get { return _source.CanWrite; }
-        }
-
-        /// <summary>
-        /// When overridden in a derived class, gets the length in bytes of the stream.
-        /// </summary>
-        /// <returns>
-        /// A long value representing the length of the stream in bytes.
-        /// </returns>
-        /// <exception cref="T:System.NotSupportedException">A class derived from Stream does not support seeking. </exception>
-        /// <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
-        /// <filterpriority>1</filterpriority>
-        public override long Length
-        {
-            get { return _length; }
-        }
-
-        /// <summary>
-        /// Gets or sets the position within the current stream.
-        /// </summary>
-        /// <returns>
-        /// The current position within the stream.
-        /// </returns>
-        /// <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
-        /// <exception cref="T:System.NotSupportedException">The stream does not support seeking. </exception>
-        /// <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
-        /// <filterpriority>1</filterpriority>
-        public override long Position
-        {
-            get { return _source.Position - _sourceOrigin; }
-            set { Seek(value, SeekOrigin.Begin); }
-        }
-
-        /// <summary>
-        /// Gets the absolute position of the start of this bound.
-        /// </summary>
-        public long SourceOrigin
-        {
-            get { return _sourceOrigin; }
         }
 
         /// <summary>

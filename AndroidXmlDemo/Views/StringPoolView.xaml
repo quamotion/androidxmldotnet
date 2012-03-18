@@ -1,59 +1,61 @@
-﻿<Window x:Class="AndroidXmlDemo.Views.StringPoolView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="String Pool" Height="300" Width="600" MinWidth="300" MinHeight="200">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="100" />
-            <ColumnDefinition Width="*" MinWidth="100" />
-        </Grid.ColumnDefinitions>
-        
-        <ListView Margin="5" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
-            <ListView.View>
-                <GridView AllowsColumnReorder="True">
-                    <GridView.Columns>
-                        <GridViewColumn Header="Index" Width="50" DisplayMemberBinding="{Binding Index}"/>
-                        <GridViewColumn Header="Text" Width="200" DisplayMemberBinding="{Binding Text}"/>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
-        <GridSplitter Width="4" Margin="0,0,-2,0"/>
+﻿<Window x:Class="AndroidXmlDemo.Views.StringPoolView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="String Pool" Height="300" Width="600" MinWidth="300"
+        MinHeight="200">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" MinWidth="100" />
+      <ColumnDefinition Width="*" MinWidth="100" />
+    </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*" MinWidth="60"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*" MinHeight="30"/>
-                <RowDefinition Height="*" MinHeight="40"/>
-            </Grid.RowDefinitions>
+    <ListView Margin="5" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+      <ListView.View>
+        <GridView AllowsColumnReorder="True">
+          <GridView.Columns>
+            <GridViewColumn Header="Index" Width="50" DisplayMemberBinding="{Binding Index}" />
+            <GridViewColumn Header="Text" Width="200" DisplayMemberBinding="{Binding Text}" />
+          </GridView.Columns>
+        </GridView>
+      </ListView.View>
+    </ListView>
 
-            <TextBlock Margin="5" Text="Index"/>
-            <TextBox Grid.Column="1" Margin="5" Text="{Binding SelectedItem.Index, FallbackValue=''}" IsReadOnly="True" />
+    <GridSplitter Width="4" Margin="0,0,-2,0" />
 
-            <TextBlock Grid.Row="1" Margin="5" Text="Text"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="5" MinHeight="25" Text="{Binding SelectedItem.Text, FallbackValue=''}" IsReadOnly="True" TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" />
-            
-            <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="4" Margin="0,0,0,-2" />
+    <Grid Grid.Column="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" MinWidth="60" />
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" MinHeight="30" />
+        <RowDefinition Height="*" MinHeight="40" />
+      </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="2" Margin="5" Text="Styles"/>
-            <ListBox Grid.Row="2" Grid.Column="1" Margin="5" MinHeight="25" ItemsSource="{Binding SelectedItem.Styles}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <TextBlock FontWeight="Bold" Text="{Binding FirstChar, FallbackValue='x'}"/>
-                            <TextBlock> .. </TextBlock>
-                            <TextBlock FontWeight="Bold" Text="{Binding FirstChar, FallbackValue='y'}"/>
-                            <TextBlock> - </TextBlock>
-                            <TextBlock FontWeight="Bold" Text="{Binding Name, FallbackValue='name'}"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+      <TextBlock Margin="5" Text="Index" />
+      <TextBox Grid.Column="1" Margin="5" Text="{Binding SelectedItem.Index, FallbackValue=''}" IsReadOnly="True" />
+
+      <TextBlock Grid.Row="1" Margin="5" Text="Text" />
+      <TextBox Grid.Row="1" Grid.Column="1" Margin="5" MinHeight="25"
+               Text="{Binding SelectedItem.Text, FallbackValue=''}" IsReadOnly="True" TextWrapping="Wrap"
+               ScrollViewer.VerticalScrollBarVisibility="Auto" />
+
+      <GridSplitter Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                    Height="4" Margin="0,0,0,-2" />
+
+      <TextBlock Grid.Row="2" Margin="5" Text="Styles" />
+      <ListBox Grid.Row="2" Grid.Column="1" Margin="5" MinHeight="25" ItemsSource="{Binding SelectedItem.Styles}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <TextBlock>
+              <TextBlock FontWeight="Bold" Text="{Binding FirstChar, FallbackValue='x'}" />
+              <TextBlock>..</TextBlock>
+              <TextBlock FontWeight="Bold" Text="{Binding FirstChar, FallbackValue='y'}" />
+              <TextBlock>-</TextBlock>
+              <TextBlock FontWeight="Bold" Text="{Binding Name, FallbackValue='name'}" />
+            </TextBlock>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
     </Grid>
+  </Grid>
 </Window>

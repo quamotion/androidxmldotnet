@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Media;
 using System.Xml;
 using AndroidXml.Res;
@@ -11,20 +10,21 @@ namespace AndroidXml
 {
     public class AndroidXmlReader : XmlReader
     {
-        private readonly ResXMLParser _parser;
-        private uint? _attributeIndex;
         private readonly Dictionary<string, List<string>> _namespaces;
+        private readonly ResXMLParser _parser;
         private readonly IEnumerator<bool> _readIterator;
+        private uint? _attributeIndex;
 
         #region Backing fields for overriden properties
-        private XmlNodeType _nodeType;
+
+        private readonly XmlNameTable _nameTable;
+        private int _depth;
         private string _localName;
         private string _namespaceUri;
+        private XmlNodeType _nodeType;
         private string _prefix;
-        private string _value;
-        private int _depth;
         private ReadState _readState;
-        private readonly XmlNameTable _nameTable;
+        private string _value;
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace AndroidXml
         public override string GetAttribute(string name, string namespaceURI)
         {
             if (_parser.EventCode != ResXMLParser.XmlParserEventCode.START_TAG) return null;
-            var index = _parser.IndexOfAttribute(namespaceURI, name);
+            uint? index = _parser.IndexOfAttribute(namespaceURI, name);
             if (index == null) return null;
             return GetAttribute((int) index);
         }
@@ -105,7 +105,7 @@ namespace AndroidXml
         public override string GetAttribute(int i)
         {
             if (_parser.EventCode != ResXMLParser.XmlParserEventCode.START_TAG) return null;
-            var attr = _parser.GetAttribute(i < 0 ? null : (uint?)i);
+            ResXMLParser.AttributeInfo attr = _parser.GetAttribute(i < 0 ? null : (uint?) i);
             if (attr == null) throw new ArgumentOutOfRangeException("i");
             if (attr.ValueStringID != null)
             {
@@ -155,7 +155,7 @@ namespace AndroidXml
                     c = value.ColorValue;
                     return string.Format("#{0:x1}{1:x1}{2:x1}", c.R/51, c.G/51, c.B/51);
                 case Res.ValueType.TYPE_REFERENCE:
-                    var ident = value.ReferenceValue.Ident;
+                    uint? ident = value.ReferenceValue.Ident;
                     if (ident == null) return "@undef";
                     return string.Format("@{0:x8}", ident.Value);
                 default:
@@ -185,7 +185,7 @@ namespace AndroidXml
         public override bool MoveToAttribute(string name, string ns)
         {
             if (_parser.EventCode != ResXMLParser.XmlParserEventCode.START_TAG) return false;
-            var index = _parser.IndexOfAttribute(ns, name);
+            uint? index = _parser.IndexOfAttribute(ns, name);
             if (index == null) return false;
             MoveToAttribute(index);
             return true;
@@ -214,7 +214,7 @@ namespace AndroidXml
         public override bool MoveToNextAttribute()
         {
             if (_parser.EventCode != ResXMLParser.XmlParserEventCode.START_TAG) return false;
-            var nextIndex = (_attributeIndex ?? 0) + 1;
+            uint nextIndex = (_attributeIndex ?? 0) + 1;
             if (nextIndex >= AttributeCount) return false;
             MoveToAttribute(nextIndex);
             return true;
@@ -226,7 +226,7 @@ namespace AndroidXml
             _attributeIndex = index;
             if (index == null)
             {
-                var ns = _parser.ElementNamespace;
+                string ns = _parser.ElementNamespace;
                 SetState(nodeType: XmlNodeType.Element,
                          prefix: LookupPrefix(ns),
                          localName: _parser.ElementName,
@@ -234,8 +234,8 @@ namespace AndroidXml
             }
             else
             {
-                var attr = _parser.GetAttribute(index);
-                var ns = attr.Namespace;
+                ResXMLParser.AttributeInfo attr = _parser.GetAttribute(index);
+                string ns = attr.Namespace;
                 SetState(
                     nodeType: XmlNodeType.Attribute,
                     prefix: LookupPrefix(ns),
@@ -246,7 +246,8 @@ namespace AndroidXml
             return true;
         }
 
-        private void SetState(ReadState readState = ReadState.Interactive, XmlNodeType nodeType = XmlNodeType.None, string prefix = "", string localName = "", string namespaceUri = "", string value = "")
+        private void SetState(ReadState readState = ReadState.Interactive, XmlNodeType nodeType = XmlNodeType.None,
+                              string prefix = "", string localName = "", string namespaceUri = "", string value = "")
         {
             _readState = readState;
             _nodeType = nodeType;
@@ -278,7 +279,7 @@ namespace AndroidXml
         public override bool ReadAttributeValue()
         {
             if (_attributeIndex == null) return false;
-            var value = GetAttribute((int) _attributeIndex.Value);
+            string value = GetAttribute((int) _attributeIndex.Value);
             SetState(
                 nodeType: XmlNodeType.Text,
                 value: value);
@@ -303,7 +304,7 @@ namespace AndroidXml
             SetState(readState: ReadState.Initial);
             while (_readState == ReadState.Interactive || _readState == ReadState.Initial)
             {
-                var eventCode = _parser.Next();
+                ResXMLParser.XmlParserEventCode eventCode = _parser.Next();
                 if (_parser.CommentID != null)
                 {
                     SetState(nodeType: XmlNodeType.Comment, value: _parser.Comment);
@@ -316,7 +317,7 @@ namespace AndroidXml
                     case ResXMLParser.XmlParserEventCode.START_DOCUMENT:
                         break;
                     case ResXMLParser.XmlParserEventCode.END_DOCUMENT:
-                        SetState(readState:ReadState.EndOfFile);
+                        SetState(readState: ReadState.EndOfFile);
                         break;
                     case ResXMLParser.XmlParserEventCode.START_NAMESPACE:
                         prefix = _parser.NamespacePrefix;
@@ -334,7 +335,7 @@ namespace AndroidXml
                         _depth++;
                         break;
                     case ResXMLParser.XmlParserEventCode.END_TAG:
-                        var elementNamespace = _parser.ElementNamespace;
+                        string elementNamespace = _parser.ElementNamespace;
                         SetState(
                             nodeType: XmlNodeType.EndElement,
                             localName: _parser.ElementName,
@@ -394,9 +395,9 @@ namespace AndroidXml
         protected string LookupPrefix(string uri)
         {
             return _namespaces
-                .Where(pair => pair.Value.Count > 0 && (pair.Value.LastOrDefault() ?? "") == (uri ?? ""))
-                .Select(pair => pair.Key)
-                .LastOrDefault() ?? "";
+                       .Where(pair => pair.Value.Count > 0 && (pair.Value.LastOrDefault() ?? "") == (uri ?? ""))
+                       .Select(pair => pair.Key)
+                       .LastOrDefault() ?? "";
         }
 
         /// <summary>
@@ -409,6 +410,7 @@ namespace AndroidXml
         }
 
         #region Overriden abstract properties
+
         /// <summary>
         /// Gets the type of the current node.
         /// </summary>
@@ -540,6 +542,7 @@ namespace AndroidXml
         {
             get { return _nameTable; }
         }
+
         #endregion
 
         #endregion

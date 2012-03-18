@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace AndroidXml.Res
 {
@@ -14,7 +11,7 @@ namespace AndroidXml.Res
         {
             if (resourceId == null) return null;
             uint index = 0;
-            foreach (var id in ResouceIds)
+            foreach (uint id in ResouceIds)
             {
                 if (id == resourceId)
                 {

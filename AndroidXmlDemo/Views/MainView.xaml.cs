@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using AndroidXml;
 using AndroidXml.Res;
 using AndroidXmlDemo.Commands;
@@ -13,6 +12,12 @@ namespace AndroidXmlDemo.Views
     /// </summary>
     public partial class MainView : Window
     {
+        private readonly OpenFileDialog _openFileDialog = new OpenFileDialog
+        {
+            CheckFileExists = true,
+            Filter = "Android Binary XML (*.xml)|*.xml|All Files (*.*)|*.*",
+        };
+
         private readonly MainViewModel _viewModel;
 
         public MainView(MainViewModel viewModel)
@@ -42,12 +47,6 @@ namespace AndroidXmlDemo.Views
             window.Show();
         }
 
-        private readonly OpenFileDialog _openFileDialog = new OpenFileDialog
-        {
-            CheckFileExists = true,
-            Filter = "Android Binary XML (*.xml)|*.xml|All Files (*.*)|*.*",
-        };
-
         private void BrowseCommand_Executed(object sender, ArgumentEventArgs<string> e)
         {
             _openFileDialog.FileName = e.Argument;
@@ -55,6 +54,4 @@ namespace AndroidXmlDemo.Views
             _viewModel.BrowseCommandCompleted(_openFileDialog.FileName);
         }
     }
-
-
 }

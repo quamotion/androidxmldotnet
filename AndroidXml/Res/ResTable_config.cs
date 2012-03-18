@@ -142,16 +142,19 @@ namespace AndroidXml.Res
         #endregion
 
         #region Version derived properties
+
         public ushort VersionSDK
         {
             get { return (ushort) Helper.GetBits(Version, 0xFFFFu, 16); }
             set { Version = Helper.SetBits(Version, value, 0xFFFFu, 16); }
         }
+
         public ushort VersionMinor
         {
             get { return (ushort) Helper.GetBits(Version, 0xFFFFu, 0); }
             set { Version = Helper.SetBits(Version, value, 0xFFFFu, 0); }
         }
+
         #endregion
 
         #region ScreenConfig derived properties

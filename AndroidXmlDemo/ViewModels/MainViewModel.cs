@@ -25,16 +25,18 @@ namespace AndroidXmlDemo.ViewModels
         }
 
         #region Error event
+
         public event EventHandler<ArgumentEventArgs<string>> Error;
 
         public void OnError(string message)
         {
-            var handler = Error;
+            EventHandler<ArgumentEventArgs<string>> handler = Error;
             if (handler != null)
             {
                 handler(this, new ArgumentEventArgs<string> {Argument = message});
             }
         }
+
         #endregion
 
         #region Properties
@@ -109,6 +111,14 @@ namespace AndroidXmlDemo.ViewModels
 
         #region LoadCommand
 
+        private readonly Brush _attrNameColor = Brushes.Red;
+        private readonly Brush _attrQuotesColor = Brushes.Black;
+        private readonly Brush _attrValueColor = Brushes.Blue;
+        private readonly Brush _cdataSectionColor = Brushes.Gray;
+        private readonly Brush _commentColor = Brushes.Green;
+        private readonly Brush _delimiterColor = Brushes.Blue;
+        private readonly Brush _nameColor = new SolidColorBrush(Color.FromRgb(0xA3, 0x15, 0x15));
+        private readonly Brush _textColor = Brushes.Black;
         private DelegateCommand _loadCommand;
 
         public DelegateCommand LoadCommand
@@ -153,16 +163,6 @@ namespace AndroidXmlDemo.ViewModels
                 Console.WriteLine(ex);
             }
         }
-
-        // VS 2010 default XML theme
-        private readonly Brush _nameColor = new SolidColorBrush(Color.FromRgb(0xA3, 0x15, 0x15));
-        private readonly Brush _attrNameColor = Brushes.Red;
-        private readonly Brush _attrQuotesColor = Brushes.Black;
-        private readonly Brush _attrValueColor = Brushes.Blue;
-        private readonly Brush _delimiterColor = Brushes.Blue;
-        private readonly Brush _cdataSectionColor = Brushes.Gray;
-        private readonly Brush _commentColor = Brushes.Green;
-        private readonly Brush _textColor = Brushes.Black;
 
         private void ShowResult(XmlReader reader)
         {
@@ -252,7 +252,7 @@ namespace AndroidXmlDemo.ViewModels
 
                         reader.MoveToElement();
 
-                        foreach (var info in unknownNamespaces)
+                        foreach (NamespaceInfo info in unknownNamespaces)
                         {
                             if (first)
                             {
@@ -325,10 +325,10 @@ namespace AndroidXmlDemo.ViewModels
                         line.Inlines.Add(new string(' ', indent*2));
 
                         line.Inlines.Add(new Run("<![CDATA[") {Foreground = _cdataSectionColor});
-                        
-                        var value = reader.Value;
-                        var first = true;
-                        foreach (var piece in value.Split(new[] {"]]>"}, StringSplitOptions.None))
+
+                        string value = reader.Value;
+                        bool first = true;
+                        foreach (string piece in value.Split(new[] {"]]>"}, StringSplitOptions.None))
                         {
                             if (!first)
                             {
@@ -361,7 +361,7 @@ namespace AndroidXmlDemo.ViewModels
                         var line = new Span();
                         line.Inlines.Add(new string(' ', indent*2));
 
-                        var value = reader.Value;
+                        string value = reader.Value;
                         value = value.Replace("--", "- -");
                         value = value.Replace("--", "- -"); // twice to get all
                         line.Inlines.Add(new Run("<!--" + value + "-->") {Foreground = _commentColor});
@@ -381,12 +381,6 @@ namespace AndroidXmlDemo.ViewModels
             }
 
             FormattedDocument = doc;
-        }
-
-        private class NamespaceInfo
-        {
-            public string Prefix { get; set; }
-            public string Uri { get; set; }
         }
 
         private void FormatEntities(InlineCollection inlines, string value, Brush textColor)
@@ -415,6 +409,12 @@ namespace AndroidXmlDemo.ViewModels
                 index = value.IndexOfAny(new[] {'&', '<', '>', '"'}, lastIndex);
             }
             inlines.Add(new Run(value.Substring(lastIndex)) {Foreground = textColor});
+        }
+
+        private class NamespaceInfo
+        {
+            public string Prefix { get; set; }
+            public string Uri { get; set; }
         }
 
         #endregion // LoadCommand

@@ -22,7 +22,7 @@ namespace AndroidXmlDemo.ViewModels
                     Index = i,
                     Text = stringPool.StringData[i],
                 };
-                foreach (var style in stringPool.GetStyles((uint) i))
+                foreach (ResStringPool_span style in stringPool.GetStyles((uint) i))
                 {
                     item.Styles.Add(new StringPoolStyleItem
                     {
