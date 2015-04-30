@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>androidxmlparser</id>
+    <version>1.0.0</version>
+    <authors>Markus Jarderot, Quamotion</authors>
+    <owners>quamotion</owners>
+    <licenseUrl>https://raw.githubusercontent.com/quamotion/androidxmldotnet/master/LICENSE.txt</licenseUrl>
+    <projectUrl>https://github.com/quamotion/androidxmldotnet</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A library for parsing Android binary XML format. You could use it to parse AndroidManifest.xml inside the APK files.</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright (c) 2012 Markus Jarderot</copyright>
+    <tags>android manifest xml</tags>
+  </metadata>
+</package>
