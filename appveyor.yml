@@ -1,0 +1,11 @@
+build_script:
+  - msbuild AndroidXml\AndroidXml.csproj /p:Configuration=Release /p:Platform=AnyCPU /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+on_success:
+  - cmd: cd AndroidXml
+  - cmd: nuget pack
+  - cmd: appveyor PushArtifact AndroidXml.1.0.0.0.nupkg
+
+nuget:
+  project_feed: true
+  account_feed: true
