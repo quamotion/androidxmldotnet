@@ -1,3 +1,8 @@
+| build | license |
+|-------|---------|
+
+| [![Build Status](https://ci.appveyor.com/api/projects/status/github/quamotion/androidxmldotnet)] | [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://opensource.org/licenses/MIT)
+
 # androidxmldotnet
 ## Project Description
 A library for parsing Android binary XML format. You could use it to parse `AndroidManifest.xml` inside the APK files.
