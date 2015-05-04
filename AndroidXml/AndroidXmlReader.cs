@@ -121,7 +121,7 @@ namespace AndroidXml
             switch (value.DataType)
             {
                 case Res.ValueType.TYPE_STRING:
-                    return _parser.Strings.GetString(value.StringValue);
+                    return _parser.GetString(value.StringValue);
                 case Res.ValueType.TYPE_NULL:
                     return "null";
                 case Res.ValueType.TYPE_FLOAT:

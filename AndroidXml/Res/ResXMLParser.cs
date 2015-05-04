@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using AndroidXml.Utils;
+using AndroidXml.Properties;
 
 namespace AndroidXml.Res
 {
@@ -67,7 +68,7 @@ namespace AndroidXml.Res
 
         public string Comment
         {
-            get { return _strings.GetString(CommentID); }
+            get { return this.GetString(CommentID); }
         }
 
         public uint? LineNumber
@@ -86,7 +87,7 @@ namespace AndroidXml.Res
 
         public string NamespacePrefix
         {
-            get { return Strings.GetString(NamespacePrefixID); }
+            get { return this.GetString(NamespacePrefixID); }
         }
 
         public uint? NamespaceUriID
@@ -100,7 +101,7 @@ namespace AndroidXml.Res
 
         public string NamespaceUri
         {
-            get { return Strings.GetString(NamespaceUriID); }
+            get { return this.GetString(NamespaceUriID); }
         }
 
         public uint? CDataID
@@ -114,7 +115,7 @@ namespace AndroidXml.Res
 
         public string CData
         {
-            get { return Strings.GetString(CDataID); }
+            get { return this.GetString(CDataID); }
         }
 
         public uint? ElementNamespaceID
@@ -131,7 +132,7 @@ namespace AndroidXml.Res
 
         public string ElementNamespace
         {
-            get { return Strings.GetString(ElementNamespaceID); }
+            get { return this.GetString(ElementNamespaceID); }
         }
 
         public uint? ElementNameID
@@ -148,7 +149,7 @@ namespace AndroidXml.Res
 
         public string ElementName
         {
-            get { return Strings.GetString(ElementNameID); }
+            get { return this.GetString(ElementNameID); }
         }
 
         public uint? ElementIdIndex
@@ -215,6 +216,25 @@ namespace AndroidXml.Res
             }
             _eventCode = XmlParserEventCode.END_DOCUMENT;
             return _eventCode;
+        }
+
+        internal string GetString(uint? index)
+        {
+            if (index == null) return "";
+            if (index < this.ResourceMap.ResouceIds.Count)
+            {
+                uint identifier = this.ResourceMap.ResouceIds[(int)index];
+                return PublicValuesReader.Values[identifier];
+            }
+            else
+            {
+                return Strings.GetString(index);
+            }
+        }
+
+        public string GetString(ResStringPool_ref reference)
+        {
+            return this.GetString(reference.Index);
         }
 
         private void ClearState()
@@ -351,21 +371,21 @@ namespace AndroidXml.Res
 
             public string Namespace
             {
-                get { return _parser.Strings.GetString(NamespaceID); }
+                get { return _parser.GetString(NamespaceID); }
             }
 
             public uint? NameID { get; private set; }
 
             public string Name
             {
-                get { return _parser.Strings.GetString(NameID); }
+                get { return _parser.GetString(NameID); }
             }
 
             public uint? ValueStringID { get; private set; }
 
             public string ValueString
             {
-                get { return _parser.Strings.GetString(ValueStringID); }
+                get { return _parser.GetString(ValueStringID); }
             }
 
             public Res_value TypedValue { get; private set; }

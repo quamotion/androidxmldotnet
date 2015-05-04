@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AndroidXmlReader.cs" />
+    <Compile Include="PublicValuesReader.cs" />
     <Compile Include="Utils\BoundedStream.cs" />
     <Compile Include="ResReader.cs" />
     <Compile Include="ResWriter.cs" />
@@ -73,7 +74,10 @@
     <Compile Include="Res\Res_value.cs" />
     <Compile Include="Res\ResChunk_header.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Values\NOTICE.htm" />
+    <Content Include="Values\public.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
