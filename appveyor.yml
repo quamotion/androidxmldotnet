@@ -12,7 +12,7 @@ build_script:
 on_success:
   - cmd: cd AndroidXml
   - cmd: nuget pack -Prop Configuration=Release 
-  - cmd: appveyor PushArtifact AndroidXml.%APPVEYOR_BUILD_VERSION%.nupkg
+  - cmd: appveyor PushArtifact AndroidXml.%APPVEYOR_BUILD_VERSION%.0.nupkg
 
 nuget:
   project_feed: true
