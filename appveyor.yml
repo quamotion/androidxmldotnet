@@ -1,3 +1,4 @@
+version: 1.0.{build}
 build_script:
   - msbuild AndroidXml\AndroidXml.csproj /p:Configuration=Release /p:Platform=AnyCPU /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
