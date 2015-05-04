@@ -1,8 +1,10 @@
 version: 1.0.{build}
 assembly_info:
-  assembly_version: $(appveyor_build_version)
-  assembly_file_version: $(appveyor_build_version)
-  assembly_informational_version: $(appveyor_build_version)
+  patch: true
+  file: AndroidXml\Properties\AssemblyInfo.cs
+  assembly_version: $(version)
+  assembly_file_version: $(version)
+  assembly_informational_version: $(version)
 
 build_script:
   - msbuild AndroidXml\AndroidXml.csproj /p:Configuration=Release /p:Platform=AnyCPU /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
