@@ -158,6 +158,11 @@ namespace AndroidXml.Res
         #endregion
 
         #region ScreenConfig derived properties
+        public ConfigScreenLayoutDirection ScreenConfigLayoutDirection
+        {
+            get { return (ConfigScreenLayoutDirection)Helper.GetBits(ScreenConfig, 0x3f, 6); }
+            set { ScreenConfig = Helper.SetBits(ScreenConfig, (uint)value, 0x3f, 6); }
+        }
 
         public ConfigScreenSize ScreenConfigScreenSize
         {
@@ -235,6 +240,9 @@ namespace AndroidXml.Res
         DENSITY_MEDIUM = 160,
         DENSITY_TV = 213,
         DENSITY_HIGH = 240,
+        DENSITY_XHIGH = 320,
+        DENSITY_XXHIGH = 480,
+        DENSITY_XXXHIGH = 640,
         DENSITY_NONE = 0xffff,
     }
 
@@ -268,6 +276,13 @@ namespace AndroidXml.Res
         NAVHIDDEN_ANY = 0x0000,
         NAVHIDDEN_NO = 0x0001,
         NAVHIDDEN_YES = 0x0002,
+    }
+
+    public enum ConfigScreenLayoutDirection
+    {
+        LAYOUTDIR_ANY  = 0x00,
+        LAYOUTDIR_LTR = 0x01,
+        LAYOUTDIR_RTL = 0x02
     }
 
     public enum ConfigScreenSize
