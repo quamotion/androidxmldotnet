@@ -79,20 +79,20 @@ namespace AndroidXml.Res
 
         public ConfigOrientation ScreenTypeOrientation
         {
-            get { return (ConfigOrientation) Helper.GetBits(ScreenType, 0xFFu, 24); }
-            set { ScreenType = Helper.SetBits(ScreenType, (uint) value, 0xFFu, 24); }
+            get { return (ConfigOrientation) Helper.GetBits(ScreenType, 0xFFu, 0); }
+            set { ScreenType = Helper.SetBits(ScreenType, (uint) value, 0xFFu, 0); }
         }
 
         public ConfigTouchscreen ScreenTypeTouchscreen
         {
-            get { return (ConfigTouchscreen) Helper.GetBits(ScreenType, 0xFFu, 16); }
-            set { ScreenType = Helper.SetBits(ScreenType, (uint) value, 0xFFu, 16); }
+            get { return (ConfigTouchscreen) Helper.GetBits(ScreenType, 0xFFu, 8); }
+            set { ScreenType = Helper.SetBits(ScreenType, (uint) value, 0xFFu, 8); }
         }
 
         public ConfigDensity ScreenTypeDensity
         {
-            get { return (ConfigDensity) Helper.GetBits(ScreenType, 0xFFFFu, 0); }
-            set { ScreenType = Helper.SetBits(ScreenType, (uint) value, 0xFFFFu, 0); }
+            get { return (ConfigDensity) Helper.GetBits(ScreenType, 0xFFFFu, 16); }
+            set { ScreenType = Helper.SetBits(ScreenType, (uint) value, 0xFFFFu, 16); }
         }
 
         #endregion
@@ -161,14 +161,14 @@ namespace AndroidXml.Res
 
         public ConfigScreenSize ScreenConfigScreenSize
         {
-            get { return (ConfigScreenSize) Helper.GetBits(ScreenConfig, 0xFu, 24); }
-            set { ScreenConfig = Helper.SetBits(ScreenConfig, (uint) value, 0xFu, 24); }
+            get { return (ConfigScreenSize) Helper.GetBits(ScreenConfig, 0x0f, 0); }
+            set { ScreenConfig = Helper.SetBits(ScreenConfig, (uint) value, 0x0f, 0); }
         }
 
         public ConfigScreenLong ScreenConfigScreenLong
         {
-            get { return (ConfigScreenLong) Helper.GetBits(ScreenConfig, 0x3u, 28); }
-            set { ScreenConfig = Helper.SetBits(ScreenConfig, (uint) value, 0x3u, 28); }
+            get { return (ConfigScreenLong) Helper.GetBits(ScreenConfig, 0x30, 4); }
+            set { ScreenConfig = Helper.SetBits(ScreenConfig, (uint) value, 0x30, 4); }
         }
 
         public ConfigUIModeType ScreenConfigUIModeType
@@ -185,8 +185,8 @@ namespace AndroidXml.Res
 
         public ushort ScreenConfigSmallestScreenWidthDp
         {
-            get { return (ushort) Helper.GetBits(ScreenConfig, 0xFFFFu, 0); }
-            set { ScreenConfig = Helper.SetBits(ScreenConfig, value, 0xFFFFu, 0); }
+            get { return (ushort) Helper.GetBits(ScreenConfig, 0xFFFF0000u, 16); }
+            set { ScreenConfig = Helper.SetBits(ScreenConfig, value, 0xFFFF0000u, 16); }
         }
 
         #endregion
@@ -195,14 +195,14 @@ namespace AndroidXml.Res
 
         public ushort ScreenSizeDpWidth
         {
-            get { return (ushort) Helper.GetBits(ScreenSizeDp, 0xFFFFu, 16); }
-            set { ScreenSizeDp = Helper.SetBits(ScreenSizeDp, value, 0xFFFFu, 16); }
+            get { return (ushort)Helper.GetBits(ScreenSizeDp, 0xFFFFu, 0); }
+            set { ScreenSizeDp = Helper.SetBits(ScreenSizeDp, value, 0xFFFFu, 0); }
         }
 
         public ushort ScreenSizeDpHeight
         {
-            get { return (ushort) Helper.GetBits(ScreenSizeDp, 0xFFFFu, 0); }
-            set { ScreenSizeDp = Helper.SetBits(ScreenSizeDp, value, 0xFFFFu, 0); }
+            get { return (ushort)Helper.GetBits(ScreenSizeDp, 0xFFFFu, 16); }
+            set { ScreenSizeDp = Helper.SetBits(ScreenSizeDp, value, 0xFFFFu, 16); }
         }
 
         #endregion
