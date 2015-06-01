@@ -249,6 +249,15 @@ namespace AndroidXml.Res
             while (true)
             {
                 ClearState();
+
+                if(_reader.BaseStream.Position >= _reader.BaseStream.Length)
+                {
+                    // If we're at the end of the file, stop reading chunks.
+                    // Don't try to catch an EndOfStreamException - this way,
+                    // we avoid an exception being created.
+                    break;
+                }
+
                 ResChunk_header header;
                 try
                 {
@@ -256,8 +265,10 @@ namespace AndroidXml.Res
                 }
                 catch (EndOfStreamException)
                 {
+                    // Keep this just in case.
                     break;
                 }
+
                 var subStream = new BoundedStream(_reader.BaseStream, header.Size - 8);
                 var subReader = new ResReader(subStream);
                 switch (header.Type)
