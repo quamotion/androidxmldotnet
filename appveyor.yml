@@ -1,4 +1,9 @@
 version: 1.0.{build}.0
+
+environment:
+  NuGetApiKey:
+    secure: uNF4gY8KN67ODxKkGPBIz+5MDdf3MRtz4Vi+9McPhWYi4Z6YMQvOcTQRWZYd/N9b
+
 assembly_info:
   patch: true
   file: AndroidXml\Properties\AssemblyInfo.cs
@@ -12,6 +17,8 @@ build_script:
 on_success:
   - cmd: cd AndroidXml
   - cmd: nuget pack Package.nuspec -Prop Configuration=Release -Version %APPVEYOR_BUILD_VERSION%
+  - cmd: nuget setApiKey %NuGetApiKey% > nul
+  - cmd: nuget push AndroidXml.%APPVEYOR_BUILD_VERSION%.nupkg
   - ps: Push-AppveyorArtifact "AndroidXml.$($env:APPVEYOR_BUILD_VERSION).nupkg"
 
 nuget:
