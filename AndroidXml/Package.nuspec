@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>androidxmlparser</id>
+    <id>androidxml</id>
     <version>$version$</version>
     <authors>Markus Jarderot, Quamotion</authors>
     <owners>quamotion</owners>

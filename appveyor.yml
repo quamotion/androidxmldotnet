@@ -11,7 +11,7 @@ build_script:
 
 on_success:
   - cmd: cd AndroidXml
-  - cmd: nuget pack -Prop Configuration=Release 
+  - cmd: nuget pack Package.nuspec -Prop Configuration=Release -Version %APPVEYOR_BUILD_VERSION%
   - ps: Push-AppveyorArtifact "AndroidXml.$($env:APPVEYOR_BUILD_VERSION).nupkg"
 
 nuget:
