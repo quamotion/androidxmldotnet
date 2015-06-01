@@ -13,4 +13,8 @@
     <copyright>Copyright (c) 2012 Markus Jarderot</copyright>
     <tags>android manifest xml</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\AndroidXml.dll" target="lib\net40" />
+    <file src="bin\Release\AndroidXml.pdb" target="lib\net40" />
+  </files>
 </package>
