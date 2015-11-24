@@ -224,12 +224,12 @@ namespace AndroidXml.Res
             if (index < this.ResourceMap.ResouceIds.Count)
             {
                 uint identifier = this.ResourceMap.ResouceIds[(int)index];
-                return PublicValuesReader.Values[identifier];
+                if (PublicValuesReader.Values.ContainsKey(identifier))
+                {
+                    return PublicValuesReader.Values[identifier];
+                }
             }
-            else
-            {
-                return Strings.GetString(index);
-            }
+            return Strings.GetString(index);
         }
 
         public string GetString(ResStringPool_ref reference)
