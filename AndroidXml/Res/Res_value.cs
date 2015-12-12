@@ -86,6 +86,24 @@ namespace AndroidXml.Res
         }
 
         /// <summary>
+        /// Gets or sets the <see cref="ColorValue"/> as a <see cref="System.Drawing.Color"/>.
+        /// </summary>
+        public System.Drawing.Color DrawingColorValue
+        {
+            get
+            {
+                var color = this.ColorValue;
+
+                return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+            }
+
+            set
+            {
+                this.ColorValue = Color.FromArgb(value.A, value.R, value.G, value.B);
+            }
+        }
+
+        /// <summary>
         /// Gets or sets the data as a color value. Used when <see cref="DataType"/> is <see cref="ValueType.TYPE_INT_COLOR_ARGB4"/>, 
         /// <see cref="ValueType.TYPE_INT_COLOR_ARGB8"/>, <see cref="ValueType.TYPE_INT_COLOR_RGB4"/> or 
         /// <see cref="ValueType.TYPE_INT_COLOR_RGB8"/>.
