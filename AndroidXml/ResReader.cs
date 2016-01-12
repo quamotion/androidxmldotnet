@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using AndroidXml.Res;
 using AndroidXml.Utils;
+using BitConverter = System.BitConverter;
 
 namespace AndroidXml
 {
@@ -52,16 +53,6 @@ namespace AndroidXml
             return new ResStringPool_ref
             {
                 Index = index == 0xFFFFFFFFu ? (uint?) null : index,
-            };
-        }
-
-        public virtual ResStringPool_span ReadResStringPool_span()
-        {
-            return new ResStringPool_span
-            {
-                Name = ReadResStringPool_ref(),
-                FirstChar = ReadUInt32(),
-                LastChar = ReadUInt32(),
             };
         }
 
@@ -243,28 +234,37 @@ namespace AndroidXml
             var pool = new ResStringPool
             {
                 Header = header,
-                //StringIndices = new List<uint>(),
-                //StyleIndices = new List<uint>(),
                 StringData = new List<string>(),
-                StyleData = new List<ResStringPool_span>()
+                StyleData = new List<List<ResStringPool_span>>()
             };
+
+            // Offsets of the string data, relative to header.StringStart
             var stringIndices = new List<uint>();
+
             for (int i = 0; i < header.StringCount; i++)
             {
                 stringIndices.Add(ReadUInt32());
             }
+
+            // Offset of the style data, relative to header.StylesStart
+            var styleIndices = new List<uint>();
             for (int i = 0; i < header.StyleCount; i++)
             {
-                ReadUInt32(); // Skip
+                styleIndices.Add(ReadUInt32());
             }
 
+            // Keep track of how many bytes are left, to prevent us
+            // from reading invalid data.
             long bytesLeft = header.Header.Size;
             bytesLeft -= header.Header.HeaderSize;
-            bytesLeft -= 4*header.StringCount;
-            bytesLeft -= 4*header.StyleCount;
+            bytesLeft -= 4 * header.StringCount;
+            bytesLeft -= 4 * header.StyleCount;
 
+            // Fetch the block which contains the string. If a styles section is
+            // present, the strings block ends there; otherwise, it runs to the end
+            // of this entry.
             uint stringsEnd = header.StyleCount > 0 ? header.StylesStart : header.Header.Size;
-            byte[] rawStringData = ReadBytes((int) stringsEnd - (int) header.StringStart);
+            byte[] rawStringData = ReadBytes((int)stringsEnd - (int)header.StringStart);
 
             bytesLeft -= rawStringData.Length;
 
@@ -272,12 +272,14 @@ namespace AndroidXml
 
             foreach (uint startingIndex in stringIndices)
             {
+                // The starting index specifies where the string starts.
+                // We can now read the string in either UTF8 or UTF16 format.
                 uint pos = startingIndex;
                 if (isUtf8)
                 {
                     uint charLen = Helper.DecodeLengthUtf8(rawStringData, ref pos);
                     uint byteLen = Helper.DecodeLengthUtf8(rawStringData, ref pos);
-                    string item = Encoding.UTF8.GetString(rawStringData, (int) pos, (int) byteLen);
+                    string item = Encoding.UTF8.GetString(rawStringData, (int)pos, (int)byteLen);
                     if (item.Length != charLen)
                     {
                         Debug.WriteLine("Warning: UTF-8 string length ({0}) not matching specified length ({1}).",
@@ -288,28 +290,67 @@ namespace AndroidXml
                 else
                 {
                     uint charLen = Helper.DecodeLengthUtf16(rawStringData, ref pos);
-                    uint byteLen = charLen*2;
-                    string item = Encoding.Unicode.GetString(rawStringData, (int) pos, (int) byteLen);
+                    uint byteLen = charLen * 2;
+                    string item = Encoding.Unicode.GetString(rawStringData, (int)pos, (int)byteLen);
                     pool.StringData.Add(item);
                 }
             }
 
-            for (int i = 0; i < header.StyleCount; i++)
+            // If styles are present, we should read them, too.
+            if (header.StyleCount > 0)
             {
-                pool.StyleData.Add(ReadResStringPool_span());
+                byte[] rawStyleData = ReadBytes((int)header.Header.Size - (int)header.StylesStart);
+
+                foreach (uint startingIndex in styleIndices)
+                {
+                    // At startingIndex, there are N entries defining the individual tags (b, i,...)
+                    // that style the string at index i
+                    // They are terminated by a value with value END (0xFFFFFFFF)
+                    List<ResStringPool_span> styleData = new List<ResStringPool_span>();
+
+                    int pos = (int)startingIndex;
+
+                    while (true)
+                    {
+                        var index = BitConverter.ToUInt32(rawStyleData, pos);
+                        var firstChar = BitConverter.ToUInt32(rawStyleData, pos + 4);
+                        var lastChar = BitConverter.ToUInt32(rawStringData, pos + 8);
+
+                        var span = new ResStringPool_span
+                        {
+                            Name = new ResStringPool_ref()
+                            {
+                                Index = index == 0xFFFFFFFFu ? (uint?)null : index
+                            },
+                            FirstChar = firstChar,
+                            LastChar = lastChar,
+                        };
+
+                        styleData.Add(span);
+                        if (span.IsEnd)
+                        {
+                            break;
+                        }
+
+                        pos += 12;
+                    }
+
+                    pool.StyleData.Add(styleData);
+                }
+
+                bytesLeft -= rawStyleData.Length;
             }
-
-            bytesLeft -= header.StyleCount*12; // sizeof(ResStringPool_span) in C++
-
+            
+            // Make sure we didn't go out of bounds.
             if (bytesLeft < 0)
             {
                 throw new InvalidDataException("The length of the content exceeds the ResStringPool block boundary.");
             }
             if (bytesLeft > 0)
             {
-                // Padding?
+                // Padding: data is always aligned to 4 bytes.
                 Debug.WriteLine("Warning: Garbage at the end of the StringPool block. Padding?");
-                ReadBytes((int) bytesLeft);
+                ReadBytes((int)bytesLeft);
             }
 
             return pool;
