@@ -2,3 +2,6 @@ bin
 obj
 *.nuspec
 *.nupkg
+*.suo
+*.sdf
+TestResults
