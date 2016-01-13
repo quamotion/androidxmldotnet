@@ -56,9 +56,12 @@ namespace AndroidXml
             };
         }
 
-        public virtual ResTable_config ReadResTable_config()
+        public virtual ResTable_config ReadResTable_config(uint size)
         {
-            return new ResTable_config
+            // There are different versions of this table, each differing in length.
+            // Depending on the size, we should not read all data.
+
+            var value = new ResTable_config
             {
                 Size = ReadUInt32(),
                 IMSI = ReadUInt32(),
@@ -67,9 +70,29 @@ namespace AndroidXml
                 Input = ReadUInt32(),
                 ScreenSize = ReadUInt32(),
                 Version = ReadUInt32(),
-                ScreenConfig = ReadUInt32(),
-                ScreenSizeDp = ReadUInt32(),
             };
+
+            // Read 7 uints, which is 7 * 4 = 28 bytes worth of data. This is
+            // also the minimal size of this table; so really old file formats
+            // will stop reading here (i.e. they don't have values for ScreenConfig
+            // and ScreenSizeDp)
+            if(size <= 28)
+            {
+                return value;
+            }
+
+            value.ScreenConfig = ReadUInt32();
+
+            // And the screen size was the latest addition, so not all files may
+            // have this value
+            if(size <= 32)
+            {
+                return value;
+            }
+
+            value.ScreenSizeDp = ReadUInt32();
+
+            return value;
         }
 
         public virtual ResTable_entry ReadResTable_entry()
@@ -137,13 +160,21 @@ namespace AndroidXml
 
         public virtual ResTable_type ReadResTable_type(ResChunk_header header)
         {
+            // The config data is versioned using the "size"; newer versions are
+            // larger and more data. So we need to let the ReadResTable_config
+            // method know how much data it can read to prevent it from being
+            // too greedy.
+            ushort configSize = header.HeaderSize;
+            configSize -= ResChunk_header.DataSize;
+            configSize -= 12; // RawId, EntryCount, EntriesStart
+
             return new ResTable_type
             {
                 Header = header,
                 RawID = ReadUInt32(),
                 EntryCount = ReadUInt32(),
                 EntriesStart = ReadUInt32(),
-                Config = ReadResTable_config(),
+                Config = ReadResTable_config(configSize),
             };
         }
 

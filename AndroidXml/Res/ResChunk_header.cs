@@ -5,6 +5,18 @@ namespace AndroidXml.Res
     [Serializable]
     public class ResChunk_header
     {
+        /// <summary>
+        /// The number of bytes the <see cref="ResChunk_header"/> class occupies on disk.
+        /// </summary>
+        public static ushort DataSize
+        {
+            get
+            {
+                // Type and HeaderSize are uint16_t; size is uint32_t
+                return 8;
+            }
+        }
+
         /// Type identifier for this chunk.  The meaning of this value depends on the containing chunk.
         public ResourceType Type { get; set; }
 
