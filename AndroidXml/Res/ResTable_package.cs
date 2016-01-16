@@ -12,5 +12,6 @@ namespace AndroidXml.Res
         public uint LastPublicType { get; set; }
         public uint KeyStrings { get; set; }
         public uint LastPublicKey { get; set; }
+        public uint TypeIdOffset { get; set; }
     }
 }

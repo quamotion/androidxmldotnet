@@ -11,7 +11,8 @@ namespace AndroidXml
     public class ResReader : BinaryReader
     {
         public ResReader(Stream input)
-            : base(input) {}
+            : base(input)
+        { }
 
         public virtual Res_value ReadRes_value()
         {
@@ -19,7 +20,7 @@ namespace AndroidXml
             {
                 Size = ReadUInt16(),
                 Res0 = ReadByte(),
-                DataType = (ValueType) ReadByte(),
+                DataType = (ValueType)ReadByte(),
                 RawData = ReadUInt32()
             };
         }
@@ -28,7 +29,7 @@ namespace AndroidXml
         {
             return new ResChunk_header
             {
-                Type = (ResourceType) ReadUInt16(),
+                Type = (ResourceType)ReadUInt16(),
                 HeaderSize = ReadUInt16(),
                 Size = ReadUInt32(),
             };
@@ -41,7 +42,7 @@ namespace AndroidXml
                 Header = header,
                 StringCount = ReadUInt32(),
                 StyleCount = ReadUInt32(),
-                Flags = (StringPoolFlags) ReadUInt32(),
+                Flags = (StringPoolFlags)ReadUInt32(),
                 StringStart = ReadUInt32(),
                 StylesStart = ReadUInt32(),
             };
@@ -52,7 +53,7 @@ namespace AndroidXml
             uint index = ReadUInt32();
             return new ResStringPool_ref
             {
-                Index = index == 0xFFFFFFFFu ? (uint?) null : index,
+                Index = index == 0xFFFFFFFFu ? (uint?)null : index,
             };
         }
 
@@ -76,7 +77,7 @@ namespace AndroidXml
             // also the minimal size of this table; so really old file formats
             // will stop reading here (i.e. they don't have values for ScreenConfig
             // and ScreenSizeDp)
-            if(size <= 28)
+            if (size <= 28)
             {
                 return value;
             }
@@ -85,12 +86,19 @@ namespace AndroidXml
 
             // And the screen size was the latest addition, so not all files may
             // have this value
-            if(size <= 32)
+            if (size <= 32)
             {
                 return value;
             }
 
             value.ScreenSizeDp = ReadUInt32();
+
+            if(size > 36)
+            {
+                // New fields have been added that we don't know about;
+                // padding.
+                ReadBytes((int)size - 36);
+            }
 
             return value;
         }
@@ -100,7 +108,7 @@ namespace AndroidXml
             return new ResTable_entry
             {
                 Size = ReadUInt16(),
-                Flags = (EntryFlags) ReadUInt16(),
+                Flags = (EntryFlags)ReadUInt16(),
                 Key = ReadResStringPool_ref(),
             };
         }
@@ -128,7 +136,7 @@ namespace AndroidXml
             return new ResTable_map_entry
             {
                 Size = ReadUInt16(),
-                Flags = (EntryFlags) ReadUInt16(),
+                Flags = (EntryFlags)ReadUInt16(),
                 Key = ReadResStringPool_ref(),
                 Parent = ReadResTable_ref(),
                 Count = ReadUInt32(),
@@ -137,7 +145,7 @@ namespace AndroidXml
 
         public virtual ResTable_package ReadResTable_package(ResChunk_header header)
         {
-            return new ResTable_package
+            var value = new ResTable_package
             {
                 Header = header,
                 Id = ReadUInt32(),
@@ -147,6 +155,19 @@ namespace AndroidXml
                 KeyStrings = ReadUInt32(),
                 LastPublicKey = ReadUInt32(),
             };
+
+            if (header.HeaderSize > 284)
+            {
+                value.TypeIdOffset = ReadUInt32();
+            }
+
+            if (header.HeaderSize > 292)
+            {
+                // New fields have been added, which we don't know about.
+                ReadBytes((int)header.HeaderSize - 292);
+            }
+
+            return value;
         }
 
         public virtual ResTable_ref ReadResTable_ref()
@@ -154,7 +175,7 @@ namespace AndroidXml
             uint ident = ReadUInt32();
             return new ResTable_ref
             {
-                Ident = ident == 0xFFFFFFFFu ? (uint?) null : ident,
+                Ident = ident == 0xFFFFFFFFu ? (uint?)null : ident,
             };
         }
 
@@ -371,7 +392,7 @@ namespace AndroidXml
 
                 bytesLeft -= rawStyleData.Length;
             }
-            
+
             // Make sure we didn't go out of bounds.
             if (bytesLeft < 0)
             {
@@ -412,7 +433,7 @@ namespace AndroidXml
             if (bytesLeft > 0)
             {
                 Debug.WriteLine("Warning: Garbage at the end of the StringPool block. Padding?");
-                ReadBytes((int) bytesLeft);
+                ReadBytes((int)bytesLeft);
             }
 
             return element;
