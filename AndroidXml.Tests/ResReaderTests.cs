@@ -1,4 +1,9 @@
-﻿using AndroidXml.Res;
+﻿// Copyright (c) 2016 Quamotion
+//
+// This software may be modified and distributed under the terms
+// of the MIT license.  See the LICENSE file for details.
+
+using AndroidXml.Res;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 
