@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) 2012 Markus Jarderot
+// Copyright (c) 2016 Quamotion
+//
+// This software may be modified and distributed under the terms
+// of the MIT license.  See the LICENSE file for details.
+
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
