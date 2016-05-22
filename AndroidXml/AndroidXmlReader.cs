@@ -1,5 +1,5 @@
 ﻿// Copyright (c) 2012 Markus Jarderot
-// Copyright (c) 2015 Quamotion
+// Copyright (c) 2015-2016 Quamotion
 //
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows.Media;
 using System.Xml;
 using AndroidXml.Res;
+using System.Drawing;
 
 namespace AndroidXml
 {
