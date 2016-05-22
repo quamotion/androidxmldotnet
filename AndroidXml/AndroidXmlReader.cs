@@ -365,12 +365,12 @@ namespace AndroidXml
                 yield return false;
             }
         }
-
-        /// <summary>
-        /// Changes the <see cref="P:System.Xml.XmlReader.ReadState"/> to Closed.
-        /// </summary>
-        public override void Close()
+        
+        /// <inheritdoc/>
+        protected override void Dispose(bool disposing)
         {
+            base.Dispose(disposing);
+
             if (_readState == ReadState.Closed) return;
             _readState = ReadState.Closed;
             _parser.Close();
@@ -415,7 +415,7 @@ namespace AndroidXml
             throw new InvalidOperationException("Entities not supported");
         }
 
-        #region Overriden abstract properties
+#region Overriden abstract properties
 
         /// <summary>
         /// Gets the type of the current node.
@@ -549,9 +549,9 @@ namespace AndroidXml
             get { return _nameTable; }
         }
 
-        #endregion
+#endregion
 
-        #endregion
+#endregion
     }
 
     internal class NamespaceInfo
