@@ -9,7 +9,9 @@ using System.Drawing;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class Res_value
     {
         /// <summary>

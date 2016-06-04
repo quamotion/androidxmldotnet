@@ -7,7 +7,9 @@ using System;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class ResStringPool_header
     {
         public ResChunk_header Header { get; set; }

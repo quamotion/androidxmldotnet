@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.54-*",
 
   "authors": [ "Markus Jarderot" ],
   "title": "Android XML parser for .NET",
@@ -11,7 +11,7 @@
     "repository": {
       "type": "git",
       "url": "https://github.com/quamotion/androidxmldotnet/"
-    },
+    }
   },
 
   "dependencies": {
@@ -27,8 +27,6 @@
       "imports": "dnxcore50",
       "dependencies": {
     	"NETStandard.Library": "1.5.0-rc2-24027",
-        "System.Runtime.Serialization.Primitives": "4.1.1-rc2-24027",
-        "System.Runtime.Serialization.Formatters": "4.0.0-rc3-24111",
         "CoreCompat.System.Drawing": "1.0.0-beta003"
       }
     },

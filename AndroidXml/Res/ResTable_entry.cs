@@ -7,7 +7,9 @@ using System;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class ResTable_entry
     {
         public ushort Size { get; set; }

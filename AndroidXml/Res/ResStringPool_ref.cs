@@ -7,7 +7,9 @@ using System;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class ResStringPool_ref
     {
         public uint? Index { get; set; }
