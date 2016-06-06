@@ -9,7 +9,9 @@ using AndroidXml.Utils;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class ResTable_config
     {
         // Original properties

@@ -5,11 +5,13 @@
 // of the MIT license.  See the LICENSE file for details.
 
 using System;
-using System.Windows.Media;
+using System.Drawing;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class Res_value
     {
         /// <summary>
@@ -119,7 +121,11 @@ namespace AndroidXml.Res
             get
             {
                 byte[] bytes = BitConverter.GetBytes(RawData);
-                return new Color {A = bytes[3], R = bytes[2], G = bytes[1], B = bytes[0]};
+                return Color.FromArgb(
+                    alpha: bytes[3],
+                    red: bytes[2],
+                    green: bytes[1],
+                    blue: bytes[0]);
             }
             set { RawData = BitConverter.ToUInt32(new[] {value.B, value.G, value.R, value.A}, 0); }
         }

@@ -7,7 +7,9 @@ using System;
 
 namespace AndroidXml.Res
 {
+#if !NETSTANDARD1_5
     [Serializable]
+#endif
     public class ResXMLTree_namespaceExt
     {
         public ResStringPool_ref Prefix { get; set; }

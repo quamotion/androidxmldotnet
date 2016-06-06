@@ -366,7 +366,7 @@ namespace AndroidXml.Res
         {
             if (_eventCode == XmlParserEventCode.CLOSED) return;
             _eventCode = XmlParserEventCode.CLOSED;
-            _reader.Close();
+            _reader.Dispose();
         }
 
         #region Nested type: AttributeInfo

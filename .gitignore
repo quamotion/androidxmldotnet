@@ -6,3 +6,6 @@ obj
 *.sdf
 TestResults
 *.opendb
+.vs/
+*.lock.json
+*.exe
