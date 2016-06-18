@@ -70,14 +70,38 @@ namespace AndroidXml
         public virtual void Write(ResTable_config data)
         {
             _writer.Write(data.Size);
-            _writer.Write(data.IMSI);
-            _writer.Write(data.Locale);
-            _writer.Write(data.ScreenType);
-            _writer.Write(data.Input);
-            _writer.Write(data.ScreenSize);
-            _writer.Write(data.Version);
-            _writer.Write(data.ScreenConfig);
-            _writer.Write(data.ScreenSizeDp);
+
+            _writer.Write(data.IMSI_MCC);
+            _writer.Write(data.IMSI_MNC);
+
+            _writer.Write(Encoding.ASCII.GetBytes(data.LocaleLanguage));
+            _writer.Write(Encoding.ASCII.GetBytes(data.LocaleCountry));
+
+            _writer.Write((byte)data.ScreenTypeOrientation);
+            _writer.Write((byte)data.ScreenTypeTouchscreen);
+            _writer.Write((ushort)data.ScreenTypeDensity);
+
+            _writer.Write((byte)data.InputKeyboard);
+            _writer.Write((byte)data.InputNavigation);
+            _writer.Write(data.InputFlags);
+            _writer.Write(data.Input_Pad0);
+
+            _writer.Write(data.ScreenSizeWidth);
+            _writer.Write(data.ScreenSizeHeight);
+
+            _writer.Write(data.VersionSdk);
+            _writer.Write(data.VersionMinor);
+
+            _writer.Write(data.ScreenConfigScreenLayout);
+            _writer.Write(data.ScreenConfigUIMode);
+            _writer.Write(data.ScreenConfigSmallestScreenWidthDp);
+
+            _writer.Write(Encoding.ASCII.GetBytes(data.LocaleScript));
+            _writer.Write(Encoding.ASCII.GetBytes(data.LocaleVariant));
+
+            _writer.Write(data.ScreenLayout2);
+            _writer.Write(data.ScreenConfigPad1);
+            _writer.Write(data.ScreenConfigPad2);
         }
 
         public virtual void Write(ResTable_entry data)

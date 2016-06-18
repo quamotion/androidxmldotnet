@@ -19,6 +19,16 @@ namespace AndroidXml.Utils
             return (field >> shift) & mask;
         }
 
+        public static byte SetBits(byte field, byte value, byte mask, byte shift)
+        {
+            return (byte)((field & ~(mask << shift)) | ((value & mask) << shift));
+        }
+
+        public static byte GetBits(byte field, byte mask, byte shift)
+        {
+            return (byte)((field >> shift) & mask);
+        }
+
         public static uint DecodeLengthUtf8(byte[] data, ref uint position)
         {
             uint len = data[position];
