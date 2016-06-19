@@ -71,12 +71,21 @@ namespace AndroidXml
             var value = new ResTable_config
             {
                 Size = ReadUInt32(),
-                IMSI = ReadUInt32(),
-                Locale = ReadUInt32(),
-                ScreenType = ReadUInt32(),
-                Input = ReadUInt32(),
-                ScreenSize = ReadUInt32(),
-                Version = ReadUInt32(),
+                IMSI_MCC = ReadUInt16(),
+                IMSI_MNC = ReadUInt16(),
+                LocaleLanguage = new char[] { (char)ReadByte(), (char)ReadByte() },
+                LocaleCountry = new char[] { (char)ReadByte(), (char)ReadByte() },
+                ScreenTypeOrientation = (ConfigOrientation)ReadByte(),
+                ScreenTypeTouchscreen = (ConfigTouchscreen)ReadByte(),
+                ScreenTypeDensity = (ConfigDensity)ReadUInt16(),
+                InputKeyboard = (ConfigKeyboard)ReadByte(),
+                InputNavigation = (ConfigNavigation)ReadByte(),
+                InputFlags = ReadByte(),
+                Input_Pad0 = ReadByte(),
+                ScreenSizeWidth = ReadUInt16(),
+                ScreenSizeHeight = ReadUInt16(),
+                VersionSdk = ReadUInt16(),
+                VersionMinor = ReadUInt16()
             };
 
             // Read 7 uints, which is 7 * 4 = 28 bytes worth of data. This is
@@ -88,22 +97,42 @@ namespace AndroidXml
                 return value;
             }
 
-            value.ScreenConfig = ReadUInt32();
+            value.ScreenConfigScreenLayout = ReadByte();
+            value.ScreenConfigUIMode = ReadByte();
+            value.ScreenConfigSmallestScreenWidthDp = ReadUInt16();
 
-            // And the screen size was the latest addition, so not all files may
+            // The screen size was another addition, so not all files may
             // have this value
             if (size <= 32)
             {
                 return value;
             }
 
-            value.ScreenSizeDp = ReadUInt32();
+            value.ScreenSizeDpWidth = ReadUInt16();
+            value.ScreenSizeDpHeight = ReadUInt16();
 
-            if(size > 36)
+            if (size <= 36)
+            {
+                return value;
+            }
+
+            value.LocaleScript = Encoding.ASCII.GetString(ReadBytes(4)).ToCharArray();
+            value.LocaleVariant = Encoding.ASCII.GetString(ReadBytes(8)).ToCharArray();
+
+            if (size <= 48)
+            {
+                return value;
+            }
+
+            value.ScreenLayout2 = ReadByte();
+            value.ScreenConfigPad1 = ReadByte();
+            value.ScreenConfigPad2 = ReadUInt16();
+
+            if (size > 52)
             {
                 // New fields have been added that we don't know about;
                 // padding.
-                ReadBytes((int)size - 36);
+                ReadBytes((int)size - 52);
             }
 
             return value;
