@@ -19,7 +19,10 @@
 
   "buildOptions": {
     "keyFile": "qm.snk",
-    "strongName": true
+    "strongName": true,
+    "embed": [
+      "Values/public.xml"
+    ]
   },
 
   "frameworks": {
