@@ -24,7 +24,7 @@ namespace AndroidXml.Tests
                 var header = reader.ReadResChunk_header();
                 Assert.AreEqual(ResourceType.RES_TABLE_TYPE, header.Type);
 
-                // From here, wen can read the resTableHeader. It indicates the number
+                // From here, we can read the resTableHeader. It indicates the number
                 // of packages that are contained in this file.
                 var tableHeader = reader.ReadResTable_header(header);
 

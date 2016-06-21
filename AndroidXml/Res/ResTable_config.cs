@@ -78,7 +78,7 @@ namespace AndroidXml.Res
         public ConfigScreenLayoutDirection ScreenConfigLayoutDirection
         {
             get { return (ConfigScreenLayoutDirection)Helper.GetBits(ScreenConfigScreenLayout, (byte)0xc0, (byte)0x6); }
-            set { ScreenConfigScreenLayout = Helper.SetBits(ScreenConfigScreenLayout, (byte)value, (byte)0x3f, (byte)0x6); }
+            set { ScreenConfigScreenLayout = Helper.SetBits(ScreenConfigScreenLayout, (byte)value, (byte)0xc0, (byte)0x6); }
         }
 
         public ConfigUIModeType ScreenConfigUIModeType
