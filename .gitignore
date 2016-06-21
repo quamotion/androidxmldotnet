@@ -9,3 +9,5 @@ TestResults
 .vs/
 *.lock.json
 *.exe
+*.db
+*.user
