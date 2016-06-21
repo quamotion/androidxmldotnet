@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using AndroidXml.Utils;
-using AndroidXml.Properties;
 
 namespace AndroidXml.Res
 {
