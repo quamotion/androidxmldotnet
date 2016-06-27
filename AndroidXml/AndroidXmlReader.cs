@@ -354,7 +354,9 @@ namespace AndroidXml
                         yield return true;
                         break;
                     default:
+#if !CORECLR
                         Console.WriteLine("Warning: Unexpeted event code: {0} (0x{1:x4})", eventCode, (int) eventCode);
+#endif
                         break;
                 }
             }
