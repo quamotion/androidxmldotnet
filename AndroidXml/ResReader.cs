@@ -369,8 +369,10 @@ namespace AndroidXml
                     string item = Encoding.UTF8.GetString(rawStringData, (int)pos, (int)byteLen);
                     if (item.Length != charLen)
                     {
+#if !CORECLR
                         Debug.WriteLine("Warning: UTF-8 string length ({0}) not matching specified length ({1}).",
                                         item.Length, charLen);
+#endif
                     }
                     pool.StringData.Add(item);
                 }
@@ -436,7 +438,9 @@ namespace AndroidXml
             if (bytesLeft > 0)
             {
                 // Padding: data is always aligned to 4 bytes.
+#if !CORECLR
                 Debug.WriteLine("Warning: Garbage at the end of the StringPool block. Padding?");
+#endif
                 ReadBytes((int)bytesLeft);
             }
 
@@ -467,7 +471,9 @@ namespace AndroidXml
             }
             if (bytesLeft > 0)
             {
+#if !CORECLR
                 Debug.WriteLine("Warning: Garbage at the end of the StringPool block. Padding?");
+#endif
                 ReadBytes((int)bytesLeft);
             }
 
