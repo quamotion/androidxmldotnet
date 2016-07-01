@@ -12,7 +12,7 @@ namespace AndroidXml.Res
     /// with this is pretty cryptic.
     /// TODO: Check this, and remove this comment.
     /// </summary>
-#if !NETSTANDARD1_5
+#if !NETSTANDARD1_3
     [Serializable]
 #endif
     public class ResTable_map

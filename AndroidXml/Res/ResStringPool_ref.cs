@@ -7,7 +7,7 @@ using System;
 
 namespace AndroidXml.Res
 {
-#if !NETSTANDARD1_5
+#if !NETSTANDARD1_3
     [Serializable]
 #endif
     public class ResStringPool_ref

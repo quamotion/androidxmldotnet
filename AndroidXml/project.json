@@ -19,15 +19,22 @@
 
   "buildOptions": {
     "keyFile": "qm.snk",
-    "strongName": true
+    "strongName": true,
+    "embed": [
+      "Values/public.xml"
+    ]
   },
 
   "frameworks": {
-    "netstandard1.5": {
-      "imports": "dnxcore50",
+    "netstandard1.3": {
+      "buildOptions": {
+        "define": [ "CORECLR" ]
+      },
       "dependencies": {
-        "NETStandard.Library": "1.5.0-rc2-24027",
-        "CoreCompat.System.Drawing": "1.0.0-beta004"
+        "System.Xml.ReaderWriter": "4.0.11",
+        "System.Linq": "4.1.0",
+        "CoreCompat.System.Drawing": "1.0.0-beta006",
+        "System.Xml.XDocument": "4.0.11"
       }
     },
     "net45": {
@@ -37,8 +44,5 @@
         "System.Xml.Linq": "4.0.0.0"
       }
     }
-  },
-  "runtimes": {
-    "win7-x64": { }
   }
 }

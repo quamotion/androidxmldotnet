@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using AndroidXml.Utils;
-using AndroidXml.Properties;
 
 namespace AndroidXml.Res
 {
@@ -324,15 +323,19 @@ namespace AndroidXml.Res
                         yield return XmlParserEventCode.TEXT;
                         break;
                     default:
+#if !CORECLR
                         Console.WriteLine("Warning: Skipping chunk of type {0} (0x{1:x4})",
                                           header.Type, (int) header.Type);
+#endif
                         break;
                 }
                 byte[] junk = subStream.ReadFully();
                 if (junk.Length > 0)
                 {
+#if !CORECLR
                     Console.WriteLine("Warning: Skipping {0} bytes at the end of a {1} (0x{2:x4}) chunk.",
                                       junk.Length, header.Type, (int) header.Type);
+#endif
                 }
             }
         }
