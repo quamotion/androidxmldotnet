@@ -12,22 +12,30 @@ namespace AndroidXml
 {
     public class PublicValuesReader
     {
+        private static readonly object valuesLock = new object();
         private static Dictionary<uint, string> values;
 
         public static Dictionary<uint, string> Values
         {
             get
             {
-                if (values == null)
+                // Prevent two threads from initializing the values field
+                // at the same time. This can happen when this code is called from
+                // parallel threads.
+                lock (valuesLock)
                 {
-                    using (var stream = EmbeddedResources.PublicXml)
+                    if (values == null)
                     {
-                        XDocument xdoc = XDocument.Load(stream);
-                        var publicValues = xdoc.Element("resources").Elements("public");
-                        values = new Dictionary<uint, string>();
-                        publicValues.ToList().ForEach(pv => AddValue(pv));
+                        using (var stream = EmbeddedResources.PublicXml)
+                        {
+                            XDocument xdoc = XDocument.Load(stream);
+                            var publicValues = xdoc.Element("resources").Elements("public");
+                            values = new Dictionary<uint, string>();
+                            publicValues.ToList().ForEach(pv => AddValue(pv));
+                        }
                     }
                 }
+
                 return values;
             }
         }
