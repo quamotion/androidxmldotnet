@@ -1,6 +1,6 @@
-| build | license |
-|-------|---------|
-| [![Build Status](https://ci.appveyor.com/api/projects/status/github/quamotion/androidxmldotnet)](https://ci.appveyor.com/project/qmfrederik/androidxmldotnet/) | [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://opensource.org/licenses/MIT)
+| build | license | NuGet |
+|-------|---------|-------|
+| [![Build Status](https://ci.appveyor.com/api/projects/status/github/quamotion/androidxmldotnet)](https://ci.appveyor.com/project/qmfrederik/androidxmldotnet/) | [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://opensource.org/licenses/MIT) | [![NuGet Status](http://img.shields.io/nuget/v/androidxml.svg?style=flat)](https://www.nuget.org/packages/androidxml/)
 
 # androidxmldotnet
 ## Project Description
