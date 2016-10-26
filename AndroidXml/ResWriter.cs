@@ -14,8 +14,15 @@ namespace AndroidXml
     {
         protected readonly BinaryWriter _writer;
 
+        public ResWriter(Stream output, Encoding encoding, bool leaveOpen)
+            : this(new BinaryWriter(output, encoding, leaveOpen))
+        {
+        }
+
         public ResWriter(Stream output)
-            : this(new BinaryWriter(output)) {}
+            : this(new BinaryWriter(output))
+        {
+        }
 
         public ResWriter(BinaryWriter writer)
         {
