@@ -16,9 +16,15 @@ namespace AndroidXml
 {
     public class ResReader : BinaryReader
     {
+        public ResReader(Stream input, Encoding encoding, bool leaveOpen)
+            : base(input, encoding, leaveOpen)
+        {
+        }
+
         public ResReader(Stream input)
             : base(input)
-        { }
+        {
+        }
 
         public virtual Res_value ReadRes_value()
         {
