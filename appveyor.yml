@@ -6,8 +6,8 @@ environment:
 
 install:
   - choco install -y wget
-  - wget -q https://download.microsoft.com/download/5/F/E/5FEB7E95-C643-48D5-8329-9D2C63676CE8/dotnet-dev-win-x64.1.0.0-rc4-004771.exe
-  - dotnet-dev-win-x64.1.0.0-rc4-004771.exe /install /quiet /log dotnetinstall.log
+  - wget -q https://download.microsoft.com/download/8/F/9/8F9659B9-E628-4D1A-B6BF-C3004C8C954B/dotnet-dev-win-x64.1.0.1.exe
+  - dotnet-dev-win-x64.1.0.1.exe /install /quiet /log dotnetinstall.log
   - ps: Push-AppveyorArtifact "dotnetinstall.log"
 
 assembly_info:
