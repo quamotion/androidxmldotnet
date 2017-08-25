@@ -4,12 +4,6 @@ environment:
   NuGetApiKey:
     secure: uNF4gY8KN67ODxKkGPBIz+5MDdf3MRtz4Vi+9McPhWYi4Z6YMQvOcTQRWZYd/N9b
 
-install:
-  - choco install -y wget
-  - wget -q https://download.microsoft.com/download/8/F/9/8F9659B9-E628-4D1A-B6BF-C3004C8C954B/dotnet-dev-win-x64.1.0.1.exe
-  - dotnet-dev-win-x64.1.0.1.exe /install /quiet /log dotnetinstall.log
-  - ps: Push-AppveyorArtifact "dotnetinstall.log"
-
 assembly_info:
   patch: true
   file: AndroidXml\Properties\AssemblyInfo.cs
