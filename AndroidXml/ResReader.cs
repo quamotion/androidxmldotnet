@@ -4,12 +4,12 @@
 // This software may be modified and distributed under the terms
 // of the MIT license.  See the LICENSE file for details.
 
+using AndroidXml.Res;
+using AndroidXml.Utils;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using AndroidXml.Res;
-using AndroidXml.Utils;
 using BitConverter = System.BitConverter;
 
 namespace AndroidXml
@@ -32,7 +32,7 @@ namespace AndroidXml
             {
                 Size = ReadUInt16(),
                 Res0 = ReadByte(),
-                DataType = (ValueType)ReadByte(),
+                DataType = (Res.ValueType)ReadByte(),
                 RawData = ReadUInt32()
             };
         }
