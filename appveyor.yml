@@ -5,13 +5,11 @@ environment:
     secure: uNF4gY8KN67ODxKkGPBIz+5MDdf3MRtz4Vi+9McPhWYi4Z6YMQvOcTQRWZYd/N9b
 
 build_script:
+  - cmd: cd AndroidXml
   - cmd: dotnet restore
-  - cmd: cd AndroidXml.Tests
-  - cmd: dotnet test
-  - cmd: cd ../AndroidXml
   - cmd: dotnet build -c Release
   - cmd: dotnet pack -c Release
-  - ps: Push-AppveyorArtifact "bin\Release\AndroidXml.1.0.*.nupkg"
+  - ps: Push-AppveyorArtifact "bin\Release\AndroidXml.*.nupkg"
 
 nuget:
   project_feed: true
