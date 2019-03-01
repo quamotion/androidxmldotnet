@@ -1,16 +1,11 @@
 ﻿using AndroidXml.Res;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Xunit;
 
 namespace AndroidXml.Tests
 {
-    [TestClass]
     public class Restable_ConfigTests
     {
-        [TestMethod]
+        [Fact]
         public void GetLayoutDirectionTest()
         {
             // Arrange
@@ -21,10 +16,10 @@ namespace AndroidXml.Tests
             var value = c.ScreenConfigLayoutDirection;
 
             // Assert
-            Assert.AreEqual(ConfigScreenLayoutDirection.LAYOUTDIR_RTL, value);
+            Assert.Equal(ConfigScreenLayoutDirection.LAYOUTDIR_RTL, value);
         }
 
-        [TestMethod]
+        [Fact]
         public void SetLayoutDirectionTest()
         {
             // Arrange
@@ -34,7 +29,7 @@ namespace AndroidXml.Tests
             c.ScreenConfigLayoutDirection = ConfigScreenLayoutDirection.LAYOUTDIR_RTL;
 
             // Assert
-            Assert.AreEqual(0x80, c.ScreenConfigScreenLayout);
+            Assert.Equal(0x80, c.ScreenConfigScreenLayout);
         }
     }
 }

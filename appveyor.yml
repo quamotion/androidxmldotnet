@@ -4,19 +4,14 @@ environment:
   NuGetApiKey:
     secure: uNF4gY8KN67ODxKkGPBIz+5MDdf3MRtz4Vi+9McPhWYi4Z6YMQvOcTQRWZYd/N9b
 
-assembly_info:
-  patch: true
-  file: AndroidXml\Properties\AssemblyInfo.cs
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '{version}'
-
 build_script:
-  - cmd: cd AndroidXml
   - cmd: dotnet restore
-  - cmd: dotnet build -c Release --version-suffix r%APPVEYOR_BUILD_NUMBER%
-  - cmd: dotnet pack -c Release --version-suffix r%APPVEYOR_BUILD_NUMBER%
-  - ps: Push-AppveyorArtifact "bin\Release\AndroidXml.1.0.54-r$($env:APPVEYOR_BUILD_NUMBER).nupkg"
+  - cmd: cd AndroidXml.Tests
+  - cmd: dotnet test
+  - cmd: cd ../AndroidXml
+  - cmd: dotnet build -c Release
+  - cmd: dotnet pack -c Release
+  - ps: Push-AppveyorArtifact "bin\Release\AndroidXml.1.0.*.nupkg"
 
 nuget:
   project_feed: true
