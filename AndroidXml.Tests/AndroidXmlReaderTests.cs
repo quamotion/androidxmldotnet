@@ -1,14 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
+﻿using System.IO;
 using System.Xml.Linq;
+using Xunit;
 
 namespace AndroidXml.Tests
 {
-    [TestClass]
     public class AndroidXmlReaderTests
     {
-        [TestMethod]
-        [DeploymentItem("ApiDemos.AndroidManifest.xml")]
+        [Fact]
         public void ReadManifestTest()
         {
             using (Stream stream = File.OpenRead(@"ApiDemos.AndroidManifest.xml"))

@@ -1,20 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using Xunit;
 
 namespace AndroidXml.Tests
 {
-    [TestClass]
     public class PublicValuesReaderTests
     {
         private static bool failed;
 
-        [TestMethod]
+        [Fact]
         public void GetValuesConcurrencyTest()
         {
             // Make sure multiple threads can access the Values property in parallel.
@@ -34,7 +30,7 @@ namespace AndroidXml.Tests
                 Thread.Sleep(100);
             }
 
-            Assert.IsFalse(failed);
+            Assert.False(failed);
         }
 
         private static void GetValue()
