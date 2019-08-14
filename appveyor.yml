@@ -11,7 +11,3 @@ build_script:
   - cmd: dotnet pack -c Release
   - ps: Push-AppveyorArtifact "bin\Release\AndroidXml.*.nupkg"
   - ps: Push-AppveyorArtifact "bin\Release\AndroidXml.*.snupkg"
-
-nuget:
-  project_feed: true
-  account_feed: true
