@@ -1,4 +1,9 @@
-﻿using System.IO;
+﻿// Copyright (c) 2015 Quamotion
+//
+// This software may be modified and distributed under the terms
+// of the MIT license.  See the LICENSE file for details.
+
+using System.IO;
 using System.Xml.Linq;
 using Xunit;
 
@@ -6,10 +11,12 @@ namespace AndroidXml.Tests
 {
     public class AndroidXmlReaderTests
     {
-        [Fact]
-        public void ReadManifestTest()
+        [Theory]
+        [InlineData("ApiDemos.AndroidManifest.xml")]
+        [InlineData("AndroidManifest2.xml")]
+        public void ReadManifestTest(string path)
         {
-            using (Stream stream = File.OpenRead(@"ApiDemos.AndroidManifest.xml"))
+            using (Stream stream = File.OpenRead(path))
             {
                 AndroidXmlReader reader = new AndroidXmlReader(stream);
                 reader.MoveToContent();
