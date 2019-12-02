@@ -42,7 +42,7 @@ namespace AndroidXml.Tests
         {
             try
             {
-                var value = PublicValuesReader.Values;
+                var value = PublicValuesReader.Instance.Values;
             }
             catch(Exception)
             {
