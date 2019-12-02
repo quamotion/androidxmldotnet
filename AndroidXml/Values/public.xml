@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- This file defines the base public resources exported by the
      platform, which must always exist. -->
+
 <!-- ***************************************************************
      ***************************************************************
      IMPORTANT NOTE FOR ANYONE MODIFYING THIS FILE
      READ THIS BEFORE YOU MAKE ANY CHANGES
+
      This file defines the binary compatibility for resources.  As such,
      you must be very careful when making changes here, or you will
      completely break backwards compatibility with old applications.
+
      To avoid breaking compatibility, all new resources must be placed
      at the end of the list of resources of the same type.  Placing a resource
      in the middle of type will cause all following resources to be
      assigned new resource numbers, breaking compatibility.
+
      ***************************************************************
      *************************************************************** -->
 <resources>
+
 <!-- ===============================================================
      Resources for version 1 of the platform.
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="theme" id="0x01010000" />
   <public type="attr" name="label" id="0x01010001" />
   <public type="attr" name="icon" id="0x01010002" />
@@ -562,6 +568,7 @@
   <public type="attr" name="listChoiceIndicatorMultiple" id="0x0101021a" />
   <public type="attr" name="versionCode" id="0x0101021b" />
   <public type="attr" name="versionName" id="0x0101021c" />
+
   <public type="id" name="background" id="0x01020000" />
   <public type="id" name="checkbox" id="0x01020001" />
   <public type="id" name="content" id="0x01020002" />
@@ -590,6 +597,7 @@
   <public type="id" name="button1" id="0x01020019" />
   <public type="id" name="button2" id="0x0102001a" />
   <public type="id" name="button3" id="0x0102001b" />
+
   <public type="style" name="Animation" id="0x01030000" />
   <public type="style" name="Animation.Activity" id="0x01030001" />
   <public type="style" name="Animation.Dialog" id="0x01030002" />
@@ -674,6 +682,7 @@
   <public type="style" name="TextAppearance.Widget.DropDownItem" id="0x01030051" />
   <public type="style" name="TextAppearance.Widget.TextView.SpinnerItem" id="0x01030052" />
   <public type="style" name="TextAppearance.WindowTitle" id="0x01030053" />
+
   <public type="string" name="cancel" id="0x01040000" />
   <public type="string" name="copy" id="0x01040001" />
   <public type="string" name="copyUrl" id="0x01040002" />
@@ -694,9 +703,11 @@
   <public type="string" name="VideoView_error_text_unknown" id="0x01040011" />
   <public type="string" name="VideoView_error_title" id="0x01040012" />
   <public type="string" name="yes" id="0x01040013" />
+
   <public type="dimen" name="app_icon_size" id="0x01050000" />
   <public type="dimen" name="thumbnail_height" id="0x01050001" />
   <public type="dimen" name="thumbnail_width" id="0x01050002" />
+
   <!-- Equivalent to 0xffaaaaaa -->
   <public type="color" name="darker_gray" id="0x01060000" />
   <!-- {@deprecated Use a text color from your theme instead.} -->
@@ -730,11 +741,13 @@
   <public type="color" name="tertiary_text_dark" id="0x01060010" />
   <!-- {@deprecated Use a text color from your theme instead.} -->
   <public type="color" name="tertiary_text_light" id="0x01060011" />
+
   <public type="array" name="emailAddressTypes" id="0x01070000" />
   <public type="array" name="imProtocols" id="0x01070001" />
   <public type="array" name="organizationTypes" id="0x01070002" />
   <public type="array" name="phoneTypes" id="0x01070003" />
   <public type="array" name="postalAddressTypes" id="0x01070004" />
+
   <public type="drawable" name="alert_dark_frame" id="0x01080000" />
   <public type="drawable" name="alert_light_frame" id="0x01080001" />
   <public type="drawable" name="arrow_down_float" id="0x01080002" />
@@ -896,6 +909,7 @@
   <public type="drawable" name="ic_dialog_info" id="0x0108009b" />
   <public type="drawable" name="ic_menu_sort_alphabetically" id="0x0108009c" />
   <public type="drawable" name="ic_menu_sort_by_size" id="0x0108009d" />
+
   <public type="layout" name="activity_list_item" id="0x01090000" />
   <public type="layout" name="expandable_list_content" id="0x01090001" />
   <public type="layout" name="preference_category" id="0x01090002" />
@@ -916,6 +930,7 @@
   <public type="layout" name="select_dialog_item" id="0x01090011" />
   <public type="layout" name="select_dialog_singlechoice" id="0x01090012" />
   <public type="layout" name="select_dialog_multichoice" id="0x01090013" />
+
   <public type="anim" name="fade_in" id="0x010a0000" />
   <public type="anim" name="fade_out" id="0x010a0001" />
   <public type="anim" name="slide_in_left" id="0x010a0002" />
@@ -925,15 +940,19 @@
   <public type="anim" name="accelerate_interpolator" id="0x010a0005" />
   <!-- Acceleration curve matching Flash's quadratic ease in function. -->
   <public type="anim" name="decelerate_interpolator" id="0x010a0006" />
+
 <!-- ===============================================================
      Resources added in version 2 of the platform.
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="marqueeRepeatLimit" id="0x0101021d" />
+
 <!-- ===============================================================
      Resources added in version 3 of the platform (Cupcake).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="windowNoDisplay" id="0x0101021e" />
   <public type="attr" name="backgroundDimEnabled" id="0x0101021f" />
   <public type="attr" name="inputType" id="0x01010220" />
@@ -1009,18 +1028,22 @@
   <public type="attr" name="imeActionId" id="0x01010266" />
   <public type="attr" name="imeExtractEnterAnimation" id="0x01010268" />
   <public type="attr" name="imeExtractExitAnimation" id="0x01010269" />
+
   <!-- The part of the UI shown by an
        {@link android.inputmethodservice.InputMethodService} that contains the
        views for interacting with the user in extraction mode. -->
   <public type="id" name="extractArea" id="0x0102001c" />
+
   <!-- The part of the UI shown by an
        {@link android.inputmethodservice.InputMethodService} that contains the
        views for displaying candidates for what the user has entered. -->
   <public type="id" name="candidatesArea" id="0x0102001d" />
+
   <!-- The part of the UI shown by an
        {@link android.inputmethodservice.InputMethodService} that contains the
        views for entering text using the screen. -->
   <public type="id" name="inputArea" id="0x0102001e" />
+
   <!-- Context menu ID for the "Select All" menu item to select all text
        in a text view. -->
   <public type="id" name="selectAll" id="0x0102001f" />
@@ -1042,38 +1065,50 @@
   <public type="id" name="switchInputMethod" id="0x01020024" />
   <!-- View ID of the text editor inside of an extracted text layout. -->
   <public type="id" name="inputExtractEditText" id="0x01020025" />
+
   <!-- View ID of the {@link android.inputmethodservice.KeyboardView} within
-        an input method's input area. -->
+       an input method's input area.
+       {@deprecated Use Copy this definition into your own application project.} -->
   <public type="id" name="keyboardView" id="0x01020026" />
   <!-- View ID of a {@link android.view.View} to close a popup keyboard -->
   <public type="id" name="closeButton" id="0x01020027" />
+
   <!-- Menu ID to perform a "start selecting text" operation. -->
   <public type="id" name="startSelectingText" id="0x01020028" />
   <!-- Menu ID to perform a "stop selecting text" operation. -->
   <public type="id" name="stopSelectingText" id="0x01020029" />
   <!-- Menu ID to perform a "add to dictionary" operation. -->
   <public type="id" name="addToDictionary" id="0x0102002a" />
+
   <public type="style" name="Theme.InputMethod" id="0x01030054" />
   <public type="style" name="Theme.NoDisplay" id="0x01030055" />
   <public type="style" name="Animation.InputMethod" id="0x01030056" />
+  <!-- {@deprecated Use Copy this definition into your own application project.} -->
   <public type="style" name="Widget.KeyboardView" id="0x01030057" />
   <public type="style" name="ButtonBar" id="0x01030058" />
   <public type="style" name="Theme.Panel" id="0x01030059" />
   <public type="style" name="Theme.Light.Panel" id="0x0103005a" />
+
   <public type="string" name="dialog_alert_title" id="0x01040014" />
   <public type="string" name="VideoView_error_text_invalid_progressive_playback" id="0x01040015" />
+
   <public type="drawable" name="ic_btn_speak_now" id="0x010800a4" />
+
   <!--  Drawable to use as a background for separators on a list with a dark background -->
   <public type="drawable" name="dark_header" id="0x010800a5" />
+
   <!--  Drawable to use as a background for a taller version of the titlebar -->
   <public type="drawable" name="title_bar_tall" id="0x010800a6" />
+
   <public type="integer" name="config_shortAnimTime" id="0x010e0000" />
   <public type="integer" name="config_mediumAnimTime" id="0x010e0001" />
   <public type="integer" name="config_longAnimTime" id="0x010e0002" />
+
 <!-- ===============================================================
      Resources added in version 4 of the platform (Donut).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="tension" id="0x0101026a" />
   <public type="attr" name="extraTension" id="0x0101026b" />
   <public type="attr" name="anyDensity" id="0x0101026c" />
@@ -1110,22 +1145,27 @@
   <public type="attr" name="textColorPrimaryInverseDisableOnly" id="0x0101028b" />
   <public type="attr" name="autoUrlDetect" id="0x0101028c" />
   <public type="attr" name="resizeable" id="0x0101028d" />
+
   <public type="style" name="Widget.ProgressBar.Inverse" id="0x0103005b" />
   <public type="style" name="Widget.ProgressBar.Large.Inverse" id="0x0103005c" />
   <public type="style" name="Widget.ProgressBar.Small.Inverse" id="0x0103005d" />
+
   <!-- @deprecated Replaced by a private asset in the phone app. -->
   <public type="drawable" name="stat_sys_vp_phone_call" id="0x010800a7" />
   <!-- @deprecated Replaced by a private asset in the phone app. -->
   <public type="drawable" name="stat_sys_vp_phone_call_on_hold" id="0x010800a8" />
+
   <public type="anim" name="anticipate_interpolator" id="0x010a0007" />
   <public type="anim" name="overshoot_interpolator" id="0x010a0008" />
   <public type="anim" name="anticipate_overshoot_interpolator" id="0x010a0009" />
   <public type="anim" name="bounce_interpolator" id="0x010a000a" />
   <public type="anim" name="linear_interpolator" id="0x010a000b" />
+
 <!-- ===============================================================
      Resources added in version 5 of the platform (Eclair).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="required" id="0x0101028e" />
   <public type="attr" name="accountType" id="0x0101028f" />
   <public type="attr" name="contentAuthority" id="0x01010290" />
@@ -1158,6 +1198,7 @@
   <public type="attr" name="colorBackgroundCacheHint" id="0x010102ab" />
   <public type="attr" name="dropDownHorizontalOffset" id="0x010102ac" />
   <public type="attr" name="dropDownVerticalOffset" id="0x010102ad" />
+
   <public type="style" name="Theme.Wallpaper" id="0x0103005e" />
   <public type="style" name="Theme.Wallpaper.NoTitleBar" id="0x0103005f" />
   <public type="style" name="Theme.Wallpaper.NoTitleBar.Fullscreen" id="0x01030060" />
@@ -1165,6 +1206,7 @@
   <public type="style" name="Theme.Light.WallpaperSettings" id="0x01030062" />
   <public type="style" name="TextAppearance.SearchResult.Title" id="0x01030063" />
   <public type="style" name="TextAppearance.SearchResult.Subtitle" id="0x01030064" />
+
   <!-- Semi-transparent background that can be used when placing a dark
        themed UI on top of some arbitrary background (such as the
        wallpaper).  This darkens the background sufficiently that the UI
@@ -1172,27 +1214,35 @@
   <public type="drawable" name="screen_background_dark_transparent" id="0x010800a9" />
   <public type="drawable" name="screen_background_light_transparent" id="0x010800aa" />
   <public type="drawable" name="stat_notify_sdcard_prepare" id="0x010800ab" />
+
 <!-- ===============================================================
      Resources added in version 6 of the platform (Eclair 2.0.1).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="quickContactBadgeStyleWindowSmall" id="0x010102ae" />
   <public type="attr" name="quickContactBadgeStyleWindowMedium" id="0x010102af" />
   <public type="attr" name="quickContactBadgeStyleWindowLarge" id="0x010102b0" />
   <public type="attr" name="quickContactBadgeStyleSmallWindowSmall" id="0x010102b1" />
   <public type="attr" name="quickContactBadgeStyleSmallWindowMedium" id="0x010102b2" />
   <public type="attr" name="quickContactBadgeStyleSmallWindowLarge" id="0x010102b3" />
+
 <!-- ===============================================================
      Resources added in version 7 of the platform (Eclair MR1).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="author" id="0x010102b4" />
   <public type="attr" name="autoStart" id="0x010102b5" />
+
+
 <!-- ===============================================================
      Resources added in version 8 of the platform (Eclair MR2).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="expandableListViewWhiteStyle" id="0x010102b6" />
+
 <!-- ===============================================================
      Resources added in version 8 of the platform (Froyo / 2.2)
      =============================================================== -->
@@ -1204,8 +1254,11 @@
   <public type="attr" name="tabStripLeft" id="0x010102bb" />
   <public type="attr" name="tabStripRight" id="0x010102bc" />
   <public type="attr" name="tabStripEnabled" id="0x010102bd" />
+
   <public type="id" name="custom" id="0x0102002b" />
+
   <public type="anim" name="cycle_interpolator" id="0x010a000c" />
+
 <!-- ===============================================================
      Resources added in version 9 of the platform (Gingerbread / 2.3)
      =============================================================== -->
@@ -1224,6 +1277,7 @@
   <public type="attr" name="popupAnimationStyle" id="0x010102c9" />
   <public type="attr" name="screenSize" id="0x010102ca" />
   <public type="attr" name="screenDensity" id="0x010102cb" />
+
   <!-- presence drawables for videochat or audiochat capable contacts -->
   <public type="drawable" name="presence_video_away" id="0x010800ac" />
   <public type="drawable" name="presence_video_busy" id="0x010800ad" />
@@ -1231,14 +1285,17 @@
   <public type="drawable" name="presence_audio_away" id="0x010800af" />
   <public type="drawable" name="presence_audio_busy" id="0x010800b0" />
   <public type="drawable" name="presence_audio_online" id="0x010800b1" />
+
   <public type="style" name="TextAppearance.StatusBar.Title" id="0x01030065" />
   <public type="style" name="TextAppearance.StatusBar.Icon" id="0x01030066" />
   <public type="style" name="TextAppearance.StatusBar.EventContent" id="0x01030067" />
   <public type="style" name="TextAppearance.StatusBar.EventContent.Title" id="0x01030068" />
+
 <!-- ===============================================================
      Resources added in version 11 of the platform (Honeycomb / 3.0).
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="allContactsName" id="0x010102cc" />
   <public type="attr" name="windowActionBar" id="0x010102cd" />
   <public type="attr" name="actionBarStyle" id="0x010102ce" />
@@ -1390,14 +1447,17 @@
   <public type="attr" name="textEditSideNoPasteWindowLayout" id="0x0101035f" />
   <public type="attr" name="actionMenuTextAppearance" id="0x01010360" />
   <public type="attr" name="actionMenuTextColor" id="0x01010361" />
+
   <!-- A simple fade-in animation. -->
   <public type="animator" name="fade_in" id="0x010b0000" />
   <!-- A simple fade-out animation. -->
   <public type="animator" name="fade_out" id="0x010b0001" />
+
   <!-- Acceleration curve matching a quadtratic ease out function. -->
   <public type="interpolator" name="accelerate_quad" id="0x010c0000" />
   <!-- Acceleration curve matching a quadtratic ease in function. -->
   <public type="interpolator" name="decelerate_quad" id="0x010c0001" />
+
   <!-- Acceleration curve matching a cubic ease out function. -->
   <public type="interpolator" name="accelerate_cubic" id="0x010c0002" />
   <!-- Acceleration curve matching a cubic ease in function. -->
@@ -1423,32 +1483,40 @@
   <!-- Repeats the animation for one cycle. The rate of change follows a
        sinusoidal pattern. -->
   <public type="interpolator" name="cycle" id="0x010c000c" />
+
   <public type="id" name="home" id="0x0102002c" />
   <!-- Context menu ID for the "Select text..." menu item to switch to text
        selection context mode in text views. -->
   <public type="id" name="selectTextMode" id="0x0102002d" />
+
   <public type="dimen" name="dialog_min_width_major" id="0x01050003" />
   <public type="dimen" name="dialog_min_width_minor" id="0x01050004" />
   <public type="dimen" name="notification_large_icon_width" id="0x01050005" />
   <public type="dimen" name="notification_large_icon_height" id="0x01050006" />
+
   <!-- Standard content view for a {@link android.app.ListFragment}.
        If you are implementing a subclass of ListFragment with your
        own customized content, you can include this layout in that
        content to still retain all of the standard functionality of
        the base class. -->
   <public type="layout" name="list_content" id="0x01090014" />
+
   <!-- A simple ListView item layout which can contain text and support (single or multiple) item selection. -->
   <public type="layout" name="simple_selectable_list_item" id="0x01090015" />
+
   <!-- A version of {@link #simple_list_item_1} that is able to change its
        background state to indicate when it is activated (that is checked by
        a ListView). -->
   <public type="layout" name="simple_list_item_activated_1" id="0x01090016" />
+
   <!-- A version of {@link #simple_list_item_2} that is able to change its
        background state to indicate when it is activated (that is checked by
        a ListView). -->
   <public type="layout" name="simple_list_item_activated_2" id="0x01090017" />
+
   <public type="drawable" name="dialog_holo_dark_frame" id="0x010800b2" />
   <public type="drawable" name="dialog_holo_light_frame" id="0x010800b3" />
+
   <public type="style" name="Theme.WithActionBar" id="0x01030069" />
   <public type="style" name="Theme.NoTitleBar.OverlayActionModes" id="0x0103006a" />
   <public type="style" name="Theme.Holo" id="0x0103006b" />
@@ -1584,15 +1652,19 @@
   <public type="style" name="Widget.Holo.Light.CalendarView" id="0x010300ed" />
   <public type="style" name="Widget.DatePicker" id="0x010300ee" />
   <public type="style" name="Widget.Holo.DatePicker" id="0x010300ef" />
+
   <public type="string" name="selectTextMode" id="0x01040016" />
+
   <!-- Default icon for applications that don't specify an icon. -->
   <public type="mipmap" name="sym_def_app_icon" id="0x010d0000" />
+
 <!-- ===============================================================
      Resources added in version 12 of the platform (Honeycomb MR 1 / 3.1)
      =============================================================== -->
   <eat-comment />
   <public type="attr" name="textCursorDrawable" id="0x01010362" />
   <public type="attr" name="resizeMode" id="0x01010363" />
+
 <!-- ===============================================================
      Resources added in version 13 of the platform (Honeycomb MR 2 / 3.2)
      =============================================================== -->
@@ -1600,8 +1672,10 @@
   <public type="attr" name="requiresSmallestWidthDp" id="0x01010364" />
   <public type="attr" name="compatibleWidthLimitDp" id="0x01010365" />
   <public type="attr" name="largestWidthLimitDp" id="0x01010366" />
+
   <public type="style" name="Theme.Holo.Light.NoActionBar" id="0x010300f0" />
   <public type="style" name="Theme.Holo.Light.NoActionBar.Fullscreen" id="0x010300f1" />
+
   <public type="style" name="Widget.ActionBar.TabView" id="0x010300f2" />
   <public type="style" name="Widget.ActionBar.TabText" id="0x010300f3" />
   <public type="style" name="Widget.ActionBar.TabBar" id="0x010300f4" />
@@ -1640,6 +1714,7 @@
   <public type="style" name="TextAppearance.Holo.Widget.ActionMode.Subtitle" id="0x01030115" />
   <public type="style" name="TextAppearance.Holo.WindowTitle" id="0x01030116" />
   <public type="style" name="TextAppearance.Holo.DialogWindowTitle" id="0x01030117" />
+
 <!-- ===============================================================
      Resources added in version 14 of the platform (Ice Cream Sandwich / 4.0)
      =============================================================== -->
@@ -1710,6 +1785,7 @@
   <public type="attr" name="listPreferredItemPaddingRight" id="0x010103a4" />
   <public type="attr" name="requiresFadingEdge" id="0x010103a5" />
   <public type="attr" name="publicKey" id="0x010103a6" />
+
   <public type="style" name="TextAppearance.SuggestionHighlight" id="0x01030118" />
   <public type="style" name="Theme.Holo.Light.DarkActionBar" id="0x01030119" />
   <public type="style" name="Widget.Holo.Button.Borderless.Small" id="0x0103011a" />
@@ -1899,8 +1975,11 @@
   <public type="style" name="DeviceDefault.Light.ButtonBar" id="0x010301d2" />
   <public type="style" name="DeviceDefault.Light.ButtonBar.AlertDialog" id="0x010301d3" />
   <public type="style" name="DeviceDefault.Light.SegmentedButton" id="0x010301d4" />
+
   <public type="integer" name="status_bar_notification_info_maxnum" id="0x010e0003" />
+
   <public type="string" name="status_bar_notification_info_overflow" id="0x01040017" />
+
   <public type="color" name="holo_blue_light" id="0x01060012" />
   <public type="color" name="holo_blue_dark" id="0x01060013" />
   <public type="color" name="holo_green_light" id="0x01060014" />
@@ -1911,6 +1990,7 @@
   <public type="color" name="holo_orange_dark" id="0x01060019" />
   <public type="color" name="holo_purple" id="0x0106001a" />
   <public type="color" name="holo_blue_bright" id="0x0106001b" />
+
 <!-- ===============================================================
      Resources added in version 16 of the platform (Jelly Bean)
      =============================================================== -->
@@ -1922,10 +2002,12 @@
   <public type="attr" name="fontFamily" id="0x010103ac" />
   <public type="attr" name="mediaRouteButtonStyle" id="0x010103ad" />
   <public type="attr" name="mediaRouteTypes" id="0x010103ae" />
+
   <public type="style" name="Widget.Holo.MediaRouteButton" id="0x010301d5" />
   <public type="style" name="Widget.Holo.Light.MediaRouteButton" id="0x010301d6" />
   <public type="style" name="Widget.DeviceDefault.MediaRouteButton" id="0x010301d7" />
   <public type="style" name="Widget.DeviceDefault.Light.MediaRouteButton" id="0x010301d8" />
+
 <!-- ===============================================================
      Resources added in version 17 of the platform (Jelly Bean MR1)
      =============================================================== -->
@@ -1959,14 +2041,17 @@
   <public type="attr" name="format12Hour" id="0x010103ca" />
   <public type="attr" name="format24Hour" id="0x010103cb" />
   <public type="attr" name="timeZone" id="0x010103cc" />
+
   <public type="style" name="Widget.Holo.CheckedTextView" id="0x010301d9" />
   <public type="style" name="Widget.Holo.Light.CheckedTextView" id="0x010301da" />
   <public type="style" name="Widget.DeviceDefault.CheckedTextView" id="0x010301db" />
   <public type="style" name="Widget.DeviceDefault.Light.CheckedTextView" id="0x010301dc" />
+
 <!-- ===============================================================
      Resources added in version 18 of the platform (Jelly Bean MR2)
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="mipMap" id="0x010103cd" />
   <public type="attr" name="mirrorForRtl" id="0x010103ce" />
   <public type="attr" name="windowOverscan" id="0x010103cf" />
@@ -1981,14 +2066,17 @@
   <public type="attr" name="canRequestEnhancedWebAccessibility" id="0x010103d8" />
   <public type="attr" name="canRequestFilterKeyEvents" id="0x010103d9" />
   <public type="attr" name="layoutMode" id="0x010103da" />
+
   <public type="style" name="Theme.Holo.NoActionBar.Overscan" id="0x010301dd" />
   <public type="style" name="Theme.Holo.Light.NoActionBar.Overscan" id="0x010301de" />
   <public type="style" name="Theme.DeviceDefault.NoActionBar.Overscan" id="0x010301df" />
   <public type="style" name="Theme.DeviceDefault.Light.NoActionBar.Overscan" id="0x010301e0" />
+
 <!-- ===============================================================
     Resources added in version 19 of the platform (KitKat)
     =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="keySet" id="0x010103db" />
   <public type="attr" name="targetId" id="0x010103dc" />
   <public type="attr" name="fromScene" id="0x010103dd" />
@@ -2012,23 +2100,28 @@
   <public type="attr" name="windowTranslucentStatus" id="0x010103ef" />
   <public type="attr" name="windowTranslucentNavigation" id="0x010103f0" />
   <public type="attr" name="advancedPrintOptionsActivity" id="0x10103f1"/>
+
   <public type="style" name="Theme.Holo.NoActionBar.TranslucentDecor" id="0x010301e1" />
   <public type="style" name="Theme.Holo.Light.NoActionBar.TranslucentDecor" id="0x010301e2" />
   <public type="style" name="Theme.DeviceDefault.NoActionBar.TranslucentDecor" id="0x010301e3" />
   <public type="style" name="Theme.DeviceDefault.Light.NoActionBar.TranslucentDecor" id="0x010301e4" />
+
 <!-- ===============================================================
      Resources added in version 20 of the platform
      =============================================================== -->
   <eat-comment />
+
   <public type="attr" name="banner" id="0x10103f2" />
   <public type="attr" name="windowSwipeToDismiss" id="0x10103f3" />
   <public type="attr" name="isGame" id="0x10103f4" />
   <public type="attr" name="allowEmbedded" id="0x10103f5" />
   <public type="attr" name="setupActivity" id="0x10103f6"/>
+
 <!-- ===============================================================
      Resources added in version 21 of the platform
      =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="fastScrollStyle" id="0x010103f7" />
     <public type="attr" name="windowContentTransitions" id="0x010103f8" />
     <public type="attr" name="windowContentTransitionManager" id="0x010103f9" />
@@ -2218,17 +2311,21 @@
     <public type="attr" name="fillAlpha" id="0x010104cc" />
     <public type="attr" name="windowActivityTransitions" id="0x010104cd" />
     <public type="attr" name="colorEdgeEffect" id="0x010104ce" />
+
     <public type="id" name="mask" id="0x0102002e" />
     <public type="id" name="statusBarBackground" id="0x0102002f" />
     <public type="id" name="navigationBarBackground" id="0x01020030" />
+
     <public type="style" name="Widget.FastScroll" id="0x010301e5" />
     <public type="style" name="Widget.StackView" id="0x010301e6" />
     <public type="style" name="Widget.Toolbar" id="0x010301e7" />
     <public type="style" name="Widget.Toolbar.Button.Navigation" id="0x010301e8" />
+
     <public type="style" name="Widget.DeviceDefault.FastScroll" id="0x010301e9" />
     <public type="style" name="Widget.DeviceDefault.StackView" id="0x010301ea" />
     <public type="style" name="Widget.DeviceDefault.Light.FastScroll" id="0x010301eb" />
     <public type="style" name="Widget.DeviceDefault.Light.StackView" id="0x010301ec" />
+
     <public type="style" name="TextAppearance.Material" id="0x010301ed" />
     <public type="style" name="TextAppearance.Material.Button" id="0x010301ee" />
     <public type="style" name="TextAppearance.Material.Body2" id="0x010301ef" />
@@ -2259,6 +2356,7 @@
     <public type="style" name="TextAppearance.Material.Subhead" id="0x01030208" />
     <public type="style" name="TextAppearance.Material.Title" id="0x01030209" />
     <public type="style" name="TextAppearance.Material.WindowTitle" id="0x0103020a" />
+
     <public type="style" name="TextAppearance.Material.Widget" id="0x0103020b" />
     <public type="style" name="TextAppearance.Material.Widget.ActionBar.Menu" id="0x0103020c" />
     <public type="style" name="TextAppearance.Material.Widget.ActionBar.Subtitle" id="0x0103020d" />
@@ -2283,7 +2381,9 @@
     <public type="style" name="TextAppearance.Material.Widget.TextView.SpinnerItem" id="0x01030220" />
     <public type="style" name="TextAppearance.Material.Widget.Toolbar.Subtitle" id="0x01030221" />
     <public type="style" name="TextAppearance.Material.Widget.Toolbar.Title" id="0x01030222" />
+
     <public type="style" name="Theme.DeviceDefault.Settings" id="0x01030223" />
+
     <public type="style" name="Theme.Material" id="0x01030224" />
     <public type="style" name="Theme.Material.Dialog" id="0x01030225" />
     <public type="style" name="Theme.Material.Dialog.Alert" id="0x01030226" />
@@ -2303,6 +2403,7 @@
     <public type="style" name="Theme.Material.Voice" id="0x01030234" />
     <public type="style" name="Theme.Material.Wallpaper" id="0x01030235" />
     <public type="style" name="Theme.Material.Wallpaper.NoTitleBar" id="0x01030236" />
+
     <public type="style" name="Theme.Material.Light" id="0x01030237" />
     <public type="style" name="Theme.Material.Light.DarkActionBar" id="0x01030238" />
     <public type="style" name="Theme.Material.Light.Dialog" id="0x01030239" />
@@ -2319,12 +2420,14 @@
     <public type="style" name="Theme.Material.Light.NoActionBar.TranslucentDecor" id="0x01030244" />
     <public type="style" name="Theme.Material.Light.Panel" id="0x01030245" />
     <public type="style" name="Theme.Material.Light.Voice" id="0x01030246" />
+
     <public type="style" name="ThemeOverlay" id="0x01030247" />
     <public type="style" name="ThemeOverlay.Material" id="0x01030248" />
     <public type="style" name="ThemeOverlay.Material.ActionBar" id="0x01030249" />
     <public type="style" name="ThemeOverlay.Material.Light" id="0x0103024a" />
     <public type="style" name="ThemeOverlay.Material.Dark" id="0x0103024b" />
     <public type="style" name="ThemeOverlay.Material.Dark.ActionBar" id="0x0103024c" />
+
     <public type="style" name="Widget.Material" id="0x0103024d" />
     <public type="style" name="Widget.Material.ActionBar" id="0x0103024e" />
     <public type="style" name="Widget.Material.ActionBar.Solid" id="0x0103024f" />
@@ -2390,6 +2493,7 @@
     <public type="style" name="Widget.Material.Toolbar.Button.Navigation" id="0x0103028b" />
     <public type="style" name="Widget.Material.WebTextView" id="0x0103028c" />
     <public type="style" name="Widget.Material.WebView" id="0x0103028d" />
+
     <public type="style" name="Widget.Material.Light" id="0x0103028e" />
     <public type="style" name="Widget.Material.Light.ActionBar" id="0x0103028f" />
     <public type="style" name="Widget.Material.Light.ActionBar.Solid" id="0x01030290" />
@@ -2456,16 +2560,20 @@
     <public type="style" name="Widget.Material.Light.TimePicker" id="0x010302cd" />
     <public type="style" name="Widget.Material.Light.WebTextView" id="0x010302ce" />
     <public type="style" name="Widget.Material.Light.WebView" id="0x010302cf" />
+
     <!-- @hide This really shouldn't be public; clients using it should use @* to ref it.  -->
     <public type="style" name="Theme.Leanback.FormWizard" id="0x010302d0" />
+
     <!-- @hide @SystemApi This shouldn't be public. -->
     <public type="array" name="config_keySystemUuidMapping" id="0x01070005" />
+
     <!-- An interpolator which accelerates fast but decelerates slowly. -->
     <public type="interpolator" name="fast_out_slow_in" id="0x010c000d" />
     <!-- An interpolator which starts with a peak non-zero velocity and decelerates slowly. -->
     <public type="interpolator" name="linear_out_slow_in" id="0x010c000e" />
     <!-- An interpolator which accelerates fast and keeps accelerating until the end. -->
     <public type="interpolator" name="fast_out_linear_in" id="0x010c000f" />
+
     <!-- Used for Activity Transitions, this transition indicates that no Transition
          should be used. -->
     <public type="transition" name="no_transition" id="0x010f0000" />
@@ -2488,14 +2596,17 @@
     <!-- A transition that moves views in or out of the scene to or from the left edge when
          a view visibility changes. -->
     <public type="transition" name="slide_left" id="0x010f0007" />
+
     <!-- WebView error page for when the load fails. @hide @SystemApi -->
     <public type="raw" name="loaderror" id="0x01100000" />
     <!-- WebView error page for when domain lookup fails. @hide @SystemApi -->
     <public type="raw" name="nodomain" id="0x01100001" />
+
     <!-- ===============================================================
          Resources added in version 22 of the platform
          =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="resizeClip" id="0x010104cf" />
     <public type="attr" name="collapseContentDescription" id="0x010104d0" />
     <public type="attr" name="accessibilityTraversalBefore" id="0x010104d1" />
@@ -2506,12 +2617,15 @@
     <public type="attr" name="drawableTint" id="0x010104d6" />
     <public type="attr" name="drawableTintMode" id="0x010104d7" />
     <public type="attr" name="fraction" id="0x010104d8" />
+
     <public type="style" name="Theme.DeviceDefault.Dialog.Alert" id="0x010302d1" />
     <public type="style" name="Theme.DeviceDefault.Light.Dialog.Alert" id="0x010302d2" />
+
   <!-- ===============================================================
        Resources added in version M of the platform
        =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="trackTint" id="0x010104d9" />
     <public type="attr" name="trackTintMode" id="0x010104da" />
     <public type="attr" name="start" id="0x010104db" />
@@ -2537,11 +2651,13 @@
     <public type="attr" name="showForAllUsers" id="0x010104ef" />
     <public type="attr" name="supportsAssist" id="0x010104f0" />
     <public type="attr" name="supportsLaunchVoiceAssistFromKeyguard" id="0x010104f1" />
+
     <public type="style" name="Widget.Material.Button.Colored" id="0x010302d3" />
     <public type="style" name="TextAppearance.Material.Widget.Button.Inverse" id="0x010302d4" />
     <public type="style" name="Theme.Material.Light.LightStatusBar" id="0x010302d5" />
     <public type="style" name="ThemeOverlay.Material.Dialog" id="0x010302d6" />
     <public type="style" name="ThemeOverlay.Material.Dialog.Alert" id="0x010302d7" />
+
     <public type="id" name="pasteAsPlainText" id="0x01020031" />
     <public type="id" name="undo" id="0x01020032" />
     <public type="id" name="redo" id="0x01020033" />
@@ -2554,11 +2670,14 @@
     <public type="id" name="accessibilityActionScrollDown" id="0x0102003a" />
     <public type="id" name="accessibilityActionScrollRight" id="0x0102003b" />
     <public type="id" name="accessibilityActionContextClick" id="0x0102003c" />
+
     <public type="string" name="fingerprint_icon_content_description" id="0x01040018" />
+
   <!-- ===============================================================
        Resources added in version N of the platform
        =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="listMenuViewStyle" id="0x010104f2" />
     <public type="attr" name="subMenuArrow" id="0x010104f3" />
     <public type="attr" name="defaultWidth" id="0x010104f4" />
@@ -2613,6 +2732,7 @@
     <public type="attr" name="enableVrMode" id="0x01010525" />
     <public type="attr" name="hash" id="0x01010526" />
     <public type="attr" name="networkSecurityConfig" id="0x01010527" />
+
     <public type="style" name="Theme.Material.Light.DialogWhenLarge.DarkActionBar" id="0x010302d8" />
     <public type="style" name="Widget.Material.SeekBar.Discrete" id="0x010302d9" />
     <public type="style" name="Widget.Material.CompoundButton.Switch" id="0x010302da" />
@@ -2621,6 +2741,7 @@
     <public type="style" name="Widget.Material.Light.NumberPicker" id="0x010302dd" />
     <public type="style" name="TextAppearance.Material.Widget.Button.Colored" id="0x010302de" />
     <public type="style" name="TextAppearance.Material.Widget.Button.Borderless.Colored" id="0x010302df" />
+
     <public type="id" name="accessibilityActionSetProgress" id="0x0102003d" />
     <public type="id" name="icon_frame" id="0x0102003e" />
     <public type="id" name="list_container" id="0x0102003f" />
@@ -2638,10 +2759,12 @@
     <public type="attr" name="contextDescription" id="0x0101052e" />
     <public type="attr" name="showMetadataInPreview" id="0x0101052f" />
     <public type="attr" name="colorSecondary" id="0x01010530" />
+
   <!-- ===============================================================
        Resources added in version O of the platform
        =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="visibleToInstantApps" id="0x01010531" />
     <public type="attr" name="font" id="0x01010532" />
     <public type="attr" name="fontWeight" id="0x01010533" />
@@ -2700,24 +2823,31 @@
     <public type="attr" name="requiredSystemPropertyValue" id="0x01010566" />
     <public type="attr" name="justificationMode" id="0x01010567" />
     <public type="attr" name="autofilledHighlight" id="0x01010568" />
+
     <public type="id" name="textAssist" id="0x01020041" />
     <public type="id" name="accessibilityActionMoveWindow" id="0x01020042" />
     <public type="id" name="autofill" id="0x01020043" />
+
     <public type="string" name="paste_as_plain_text" id="0x01040019" />
+
   <!-- ===============================================================
        Resources added in version O MR1 of the platform
        =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="showWhenLocked" id="0x01010569" />
     <public type="attr" name="turnScreenOn" id="0x0101056a" />
     <public type="attr" name="classLoader" id="0x0101056b" />
     <public type="attr" name="windowLightNavigationBar" id="0x0101056c" />
     <public type="attr" name="navigationBarDividerColor" id="0x0101056d" />
+
     <public type="string" name="autofill" id="0x0104001a"/>
+
   <!-- ===============================================================
        Resources added in version P of the platform
        =============================================================== -->
     <eat-comment />
+
     <public type="attr" name="cantSaveState" id="0x0101056e" />
     <public type="attr" name="ttcIndex" id="0x0101056f" />
     <public type="attr" name="fontVariationSettings" id="0x01010570" />
@@ -2747,39 +2877,153 @@
     <public type="attr" name="userRestriction" id="0x01010584" />
     <public type="attr" name="textFontWeight" id="0x01010585" />
     <public type="attr" name="windowLayoutInDisplayCutoutMode" id="0x01010586" />
+
     <public type="style" name="Widget.DeviceDefault.Button.Colored" id="0x010302e0" />
     <public type="style" name="Widget.DeviceDefault.Button.Borderless.Colored" id="0x010302e1" />
+
     <public type="id" name="accessibilityActionShowTooltip" id="0x01020044" />
     <public type="id" name="accessibilityActionHideTooltip" id="0x01020045" />
+
     <!-- An interpolator which accelerates fast but decelerates extra slowly. -->
     <public type="interpolator" name="fast_out_extra_slow_in" id="0x10c001a"/>
+
   <!-- ===============================================================
        Resources added in version Q of the platform
+       =============================================================== -->
+    <eat-comment />
+
+    <public type="attr" name="packageType" id="0x01010587" />
+    <public type="attr" name="opticalInsetLeft" id="0x01010588" />
+    <public type="attr" name="opticalInsetTop" id="0x01010589" />
+    <public type="attr" name="opticalInsetRight" id="0x0101058a" />
+    <public type="attr" name="opticalInsetBottom" id="0x0101058b" />
+    <public type="attr" name="forceDarkAllowed" id="0x0101058c" />
+    <!-- @hide @SystemApi -->
+    <public type="attr" name="supportsAmbientMode" id="0x0101058d" />
+    <!-- @hide For use by platform and tools only. Developers should not specify this value. -->
+    <public type="attr" name="usesNonSdkApi" id="0x0101058e" />
+    <public type="attr" name="nonInteractiveUiTimeout" id="0x0101058f" />
+    <public type="attr" name="isLightTheme" id="0x01010590" />
+    <public type="attr" name="isSplitRequired" id="0x01010591" />
+    <public type="attr" name="textLocale" id="0x01010592" />
+    <public type="attr" name="settingsSliceUri" id="0x01010593" />
+    <public type="attr" name="shell" id="0x01010594" />
+    <public type="attr" name="interactiveUiTimeout" id="0x01010595" />
+    <public type="attr" name="supportsMultipleDisplays" id="0x01010596" />
+    <public type="attr" name="useAppZygote" id="0x01010597" />
+    <public type="attr" name="selectionDividerHeight" id="0x01010598" />
+    <public type="attr" name="foregroundServiceType" id="0x01010599" />
+    <public type="attr" name="hasFragileUserData" id="0x0101059a" />
+    <public type="attr" name="minAspectRatio" id="0x0101059b" />
+    <public type="attr" name="inheritShowWhenLocked" id="0x0101059c" />
+    <public type="attr" name="zygotePreloadName" id="0x0101059d" />
+    <public type="attr" name="useEmbeddedDex" id="0x0101059e" />
+    <public type="attr" name="forceUriPermissions" id="0x0101059f" />
+    <!-- @hide @SystemApi -->
+    <public type="attr" name="allowClearUserDataOnFailedRestore" id="0x01010600" />
+    <public type="attr" name="allowAudioPlaybackCapture" id="0x01010601" />
+    <public type="attr" name="secureElementName" id="0x01010602" />
+    <public type="attr" name="requestLegacyExternalStorage" id="0x01010603" />
+    <public type="attr" name="enforceStatusBarContrast" id="0x01010604" />
+    <public type="attr" name="enforceNavigationBarContrast" id="0x01010605" />
+    <public type="attr" name="identifier" id="0x01010606" />
+
+    <!-- @hide @SystemApi -->
+    <public type="drawable" name="ic_info" id="0x010800b4" />
+
+    <!-- @hide @SystemApi -->
+    <public type="style" name="Theme.DeviceDefault.DocumentsUI" id="0x010302e2" />
+    <public type="style" name="Theme.DeviceDefault.DayNight" id="0x010302e3" />
+    <public type="style" name="ThemeOverlay.DeviceDefault.Accent.DayNight" id="0x010302e4" />
+
+    <public type="id" name="accessibilityActionPageUp" id="0x01020046" />
+    <public type="id" name="accessibilityActionPageDown" id="0x01020047" />
+    <public type="id" name="accessibilityActionPageLeft" id="0x01020048" />
+    <public type="id" name="accessibilityActionPageRight" id="0x01020049" />
+
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_helpPackageNameKey" id="0x0104001b" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_helpPackageNameValue" id="0x0104001c" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_helpIntentExtraKey" id="0x0104001d" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_helpIntentNameKey" id="0x0104001e" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_feedbackIntentExtraKey" id="0x0104001f" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_feedbackIntentNameKey" id="0x01040020" />
+    <!-- @hide @SystemApi @TestApi -->
+    <public type="string" name="config_defaultAssistant" id="0x01040021" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_defaultBrowser" id="0x01040022" />
+    <!-- @hide @SystemApi @TestApi -->
+    <public type="string" name="config_defaultDialer" id="0x01040023" />
+    <!-- @hide @SystemApi -->
+    <public type="string" name="config_defaultSms" id="0x01040024" />
+
+    <!-- @hide @SystemApi -->
+    <public type="bool" name="config_sendPackageName" id="0x01110000" />
+    <!-- @hide @SystemApi -->
+    <public type="bool" name="config_showDefaultAssistant" id="0x01110001" />
+    <!-- @hide @SystemApi -->
+    <public type="bool" name="config_showDefaultEmergency" id="0x01110002" />
+    <!-- @hide @SystemApi -->
+    <public type="bool" name="config_showDefaultHome" id="0x01110003" />
+    <!-- @hide @TestApi -->
+    <public type="bool" name="config_perDisplayFocusEnabled" id="0x01110004" />
+
+    <!-- @hide @SystemApi -->
+    <public type="dimen" name="config_restrictedIconSize" id="0x01050007" />
+
+    <!-- @hide @SystemApi -->
+    <public type="color" name="system_notification_accent_color" id="0x0106001c" />
+
+
+  <!-- ===============================================================
+       Resources added in version R of the platform
+
        NOTE: add <public> elements within a <public-group> like so:
+
        <public-group type="attr" first-id="0x01010531">
            <public name="exampleAttr1" />
            <public name="exampleAttr2" />
        </public-group>
+
        To add a new public-group block, choose an id value that is 1 greater
        than the last of that item above. For example, the last "attr" id
        value above is 0x01010530, so the public-group of attrs below has
        the id value of 0x01010531.
        =============================================================== -->
   <eat-comment />
-    <public-group type="attr" first-id="0x01010587">
+
+    <public-group type="attr" first-id="0x01010607">
     </public-group>
-    <public-group type="attr" first-id="0x0101058d">
-        <!-- @hide For use by platform and tools only. Developers should not specify this value. -->
-        <public name="usesNonSdkApi" />
+
+    <public-group type="drawable" first-id="0x010800b5">
     </public-group>
-    <public-group type="style" first-id="0x010302e2">
+
+    <public-group type="style" first-id="0x010302e5">
     </public-group>
-    <public-group type="id" first-id="0x01020046">
+
+    <public-group type="id" first-id="0x0102004a">
     </public-group>
-    <public-group type="string" first-id="0x0104001b">
+
+    <public-group type="string" first-id="0x01040025">
     </public-group>
+
+    <public-group type="bool" first-id="0x01110005">
+    </public-group>
+
+    <public-group type="dimen" first-id="0x01050008">
+    </public-group>
+
+    <public-group type="color" first-id="0x0106001d">
+    </public-group>
+
   <!-- ===============================================================
        DO NOT ADD UN-GROUPED ITEMS HERE
+
        Any new items (attrs, styles, ids, etc.) *must* be added in a
        public-group block, as the preceding comment explains.
        Items added outside of a group may have their value recalculated
