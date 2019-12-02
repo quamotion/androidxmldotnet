@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -20,10 +21,10 @@ namespace AndroidXml
             {
                 throw new ArgumentNullException(nameof(stream));
             }
-            
+
             XDocument xdoc = XDocument.Load(stream);
             var publicValues = xdoc.Element("resources").Elements("public");
-            values = new Dictionary<uint, string>();
+            var values = new Dictionary<uint, string>();
             publicValues.ToList().ForEach(pv => AddValue(values, pv));
             this.Values = values;
         }
