@@ -42,13 +42,25 @@ namespace AndroidXml.Res
         private ResReader _reader;
         private ResResourceMap _resourceMap;
         private ResStringPool _strings;
+        private PublicValuesReader _publicValuesReader;
 
         public ResXMLParser(Stream source)
+            : this(source, PublicValuesReader.Instance)
+        {
+        }
+
+        public ResXMLParser(Stream source, Stream publicValues)
+            : this(source, new PublicValuesReader(publicValues))
+        {
+        }
+
+        public ResXMLParser(Stream source, PublicValuesReader publicValuesReader)
         {
             _source = source;
             _reader = new ResReader(_source);
             _eventCode = XmlParserEventCode.NOT_STARTED;
             _parserIterator = ParserIterator().GetEnumerator();
+            _publicValuesReader = publicValuesReader;
         }
 
         public ResStringPool Strings
@@ -229,9 +241,9 @@ namespace AndroidXml.Res
             if (index < this.ResourceMap.ResouceIds.Count)
             {
                 uint identifier = this.ResourceMap.ResouceIds[(int)index];
-                if (PublicValuesReader.Values.ContainsKey(identifier))
+                if (this._publicValuesReader.Values.ContainsKey(identifier))
                 {
-                    return PublicValuesReader.Values[identifier];
+                    return this._publicValuesReader.Values[identifier];
                 }
             }
             return Strings.GetString(index);
