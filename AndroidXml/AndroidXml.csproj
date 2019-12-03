@@ -5,11 +5,12 @@
     <AssemblyTitle>Android XML parser for .NET</AssemblyTitle>
     <VersionPrefix>1.0.54</VersionPrefix>
     <Authors>Markus Jarderot</Authors>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0</TargetFrameworks>
     <AssemblyName>AndroidXml</AssemblyName>
     <AssemblyOriginatorKeyFile>qm.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PublicSign>true</PublicSign>
     <PackageId>AndroidXml</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

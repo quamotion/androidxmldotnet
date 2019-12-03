@@ -35,8 +35,23 @@ namespace AndroidXml
         #endregion
 
         public AndroidXmlReader(Stream source)
+            : this (new ResXMLParser(source))
         {
-            _parser = new ResXMLParser(source);
+        }
+
+        public AndroidXmlReader(Stream source, Stream publicValues)
+            : this(new ResXMLParser(source, publicValues))
+        {
+        }
+
+        public AndroidXmlReader(Stream source, PublicValuesReader publicValuesReader)
+            : this(new ResXMLParser(source, publicValuesReader))
+        {
+        }
+
+        public AndroidXmlReader(ResXMLParser parser)
+        {
+            _parser = parser ?? throw new ArgumentNullException(nameof(parser));
             _namespaces = new Dictionary<string, List<string>>();
             _nameTable = new NameTable();
             _readIterator = ReadIterator().GetEnumerator();
