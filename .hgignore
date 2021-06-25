@@ -1,6 +1,0 @@
-^_ReSharper\..*
-\.user$
-\.suo$
-\.DotSettings$
-/bin$
-/obj$
