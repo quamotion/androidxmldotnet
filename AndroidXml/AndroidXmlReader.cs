@@ -11,6 +11,7 @@ using System.Linq;
 using System.Xml;
 using AndroidXml.Res;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace AndroidXml
 {
@@ -318,6 +319,13 @@ namespace AndroidXml
         {
             _readIterator.MoveNext();
             return _readIterator.Current;
+        }
+
+        /// <inheritdoc/>
+        public override Task<bool> ReadAsync()
+        {
+            _readIterator.MoveNext();
+            return Task.FromResult(_readIterator.Current);
         }
 
         private IEnumerable<bool> ReadIterator()
